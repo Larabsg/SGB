@@ -1,6 +1,6 @@
 import Conta
 class ContaPoupanca(Conta.Conta):
-    def __init__(self, nConta, saldo, saque, cpf, nome, senha):
+    def __init__(self, nConta, saldo, saque, cpf, nome, senha, taxa):
         super().__init__(nConta, saldo, saque, cpf, nome, senha)
         self.__taxa = taxa
     
