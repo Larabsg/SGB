@@ -16,7 +16,4 @@ class ContaCorrente(Conta.Conta):
         if(chequeEspecial == True):
             saldo = saldo - saque
             # chamar metodo updateSaldo
-    def saldo(self, saldo, taxa):
-        saldo = saldo + taxa
-        # chamar metodo updateSaldo
     
