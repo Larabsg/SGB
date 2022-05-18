@@ -1,9 +1,10 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
-import Conta
+#import conta
 #from entidades import conta
-from connection import *
+#from connection import *
+from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
@@ -17,10 +18,10 @@ def janelaPrincipal():
         valor = float(valor.get())
         user_list = []
         cpf = "12345"
-        nConta = 1234
-        cursor.execute(f'select * from conta where cpf = {cpf}')
+        nconta = 1234
+        cur.execute(f'select * from conta where cpf = {cpf}')
 
-        for x in cursor:
+        for x in cur:
             user_list.append(x)
         if user_list.__len__() == 1:
             #saldo = str(user_list)
@@ -30,43 +31,43 @@ def janelaPrincipal():
                 print('Saldo insuficiente')
             else:
                 saldo = (saldo-valor)
-                cursor.execute(f'UPDATE Conta SET saldo = {saldo} WHERE cpf = {cpf};')
-                cursor.nextset()
-                cursor.execute(f'INSERT INTO transacao (nConta, tipo, valor) VALUES ({nConta}, "Saque", {valor});')
-                con.commit()
+                cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf};')
+                cur.nextset()
+                cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Saque", {valor});')
+                con_sqlite.commit()
                 print('Saque efetuado com sucesso')
         else:
-            print('Conta ou senha incorreta\nVerifique os dados e tente novamente')
+            print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
     def depositar(valor):
         valor = float(valor.get())
         user_list = []
         cpf = "12345"
-        nConta = 1234
-        cursor.execute(f'select * from conta where cpf = {cpf}')
+        nconta = 1234
+        cur.execute(f'select * from conta where cpf = {cpf}')
 
-        for x in cursor:
+        for x in cur:
             user_list.append(x)
         if user_list.__len__() == 1:
             #saldo = str(user_list)
             saldo = user_list[0][5]
             #valor = float(input('Digite o valor para saque'))
             saldo = (saldo+valor)
-            cursor.execute(f'UPDATE Conta SET saldo = {saldo} WHERE cpf = {cpf}')
-            cursor.nextset()
-            cursor.execute(f'INSERT INTO transacao (nConta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
-            con.commit()
+            cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf}')
+            cur.nextset()
+            cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Depósito", {valor});')
+            con_sqlite.commit()
             print('Depósito efetuado com sucesso')
         else:
-            print('Conta ou senha incorreta\nVerifique os dados e tente novamente')
+            print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
     def extrato():
         user_list = []
         extrato = []
-        nConta = 1234
-        cursor.execute(f'select tipo, valor from transacao where nConta = {nConta}')
+        nconta = 1234
+        cur.execute(f'select tipo, valor from transacao where nconta = {nconta}')
 
-        for x in cursor:
+        for x in cur:
             extrato.append(x)
         return extrato
         
@@ -84,8 +85,8 @@ def janelaPrincipal():
         valor = Entry(janela4, width=25)
         valor.place(x=70, y= 50)
 
-        btnConfirmar = Button(janela4, text="Confirmar", command=partial(sacar, valor))
-        btnConfirmar.place(x=50, y=150)
+        btnconfirmar = Button(janela4, text="confirmar", command=partial(sacar, valor))
+        btnconfirmar.place(x=50, y=150)
         
         btnCancelar = Button(janela4, text="Cancelar")
         btnCancelar.place(x=160, y=150)
@@ -103,8 +104,8 @@ def janelaPrincipal():
         valor = Entry(janela5, width=25)
         valor.place(x=70, y= 50)
         
-        btnConfirmar = Button(janela5, text="Confirmar", command=partial(depositar, valor))
-        btnConfirmar.place(x=50, y=150)
+        btnconfirmar = Button(janela5, text="confirmar", command=partial(depositar, valor))
+        btnconfirmar.place(x=50, y=150)
         
         btnCancelar = Button(janela5, text="Cancelar")
         btnCancelar.place(x=160, y=150)
@@ -172,11 +173,11 @@ def janelaPrincipal():
         inputSenha = Entry(janela3, width=25)
         inputSenha.place(x=120, y =100)
 
-        nConta = Label(janela3, text="Nº conta: ")
-        nConta.place(x=20, y =130)
+        nconta = Label(janela3, text="Nº conta: ")
+        nconta.place(x=20, y =130)
 
-        inputnConta = Entry(janela3, width=25)
-        inputnConta.place(x=120, y =130)
+        inputnconta = Entry(janela3, width=25)
+        inputnconta.place(x=120, y =130)
         
         saldo = Label(janela3, text=" Saldo: ")
         saldo.place(x=20, y=165)
@@ -192,20 +193,20 @@ def janelaPrincipal():
         r1.place(x=70, y=200)
         r2.place(x=150, y=200)
         
-        tipoConta = 'undefinied'
+        tipoconta = 'undefinied'
         
         if r1 is not None:
-            tipoConta = 'corrente'
+            tipoconta = 'corrente'
         elif r2 is not None:
-            tipoConta = 'poupança'
+            tipoconta = 'poupança'
         else:
-            tipoConta = 'undefinied'
+            tipoconta = 'undefinied'
         
         btnCadastrar = Button(janela3, text="Cadastrar", command=janelaEntrar)
         btnCadastrar.place(x=100, y=230)
         
      
-        c1 = Conta()
+        c1 = conta()
         c1.depositar
             
     janela.title("Sistema Bancário")
@@ -213,8 +214,8 @@ def janelaPrincipal():
     texto = Label(janela, text=" Bem Vindo! ")
     texto.place(x=100, y =10)
 
-    nConta = Label(janela, text="Nº conta: ")
-    nConta.place(x=20, y =40)
+    nconta = Label(janela, text="Nº conta: ")
+    nconta.place(x=20, y =40)
 
     input1 = Entry(janela, width=25)
     input1.place(x=90, y =40)
