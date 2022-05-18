@@ -14,4 +14,8 @@ class ContaPoupanca(Conta.Conta):
 
     def saldo(self, saldo, taxa):
         saldo = saldo + taxa
+<<<<<<< HEAD
         # chamar metodo updateSaldo
+=======
+        # chamar metodo updateSaldo
+>>>>>>> 2de1d65e2357bf7174ea4c805ae7fe82d7079998
