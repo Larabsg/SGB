@@ -1,4 +1,9 @@
+from ctypes.wintypes import DOUBLE
+from functools import partial
+from tokenize import Double
 import Conta
+#from entidades import conta
+from connection import *
 
 from tkinter import *
 from tkinter.ttk import *
@@ -8,23 +13,47 @@ def janelaPrincipal():
     janela = Tk()
     janela.geometry("300x240")
 
+    def sacar(valor):
+        valor = float(valor.get())
+        user_list = []
+        cpf = "12345"
+        cursor.execute(f'select * from conta where cpf = {cpf}')
+
+        for x in cursor:
+            user_list.append(x)
+        if user_list.__len__() == 1:
+            #saldo = str(user_list)
+            saldo = user_list[0][5]
+            #valor = float(input('Digite o valor para saque'))
+            if(saldo-valor) < 0:
+                print('Saldo insuficiente')
+            else:
+                saldo = (saldo-valor)
+                cursor.execute(f'UPDATE Conta SET saldo = {saldo} WHERE cpf = {cpf}')
+                con.commit()
+                print('Saque efetuado com sucesso')
+        else:
+            print('Conta ou senha incorreta\nVerifique os dados e tente novamente')
+
     def janelaSacar():
         # lembrar de verificar qual o tipo de conta
+        
         janela4 = Toplevel(janela)
         janela4.title("SGB ")
         janela4.geometry("300x240")
         
-        texto = Label(janela4, text=" Quanto gostaria de sacar ? ")
+        texto = Label(janela4, text=" Quanto gostaria de sacar? ")
         texto.place(x=70, y=20)
         
-        input1 = Entry(janela4, width=25)
-        input1.place(x=70, y= 50)
         
-        btnConfirmar = Button(janela4, text="Confirmar")
+        valor = Entry(janela4, width=25)
+        valor.place(x=70, y= 50)
+
+        btnConfirmar = Button(janela4, text="Confirmar", command=partial(sacar, valor))
         btnConfirmar.place(x=50, y=150)
         
         btnCancelar = Button(janela4, text="Cancelar")
-        btnCancelar.place(x=160, y=150) 
+        btnCancelar.place(x=160, y=150)
 
     
     def janelaDepositar():
