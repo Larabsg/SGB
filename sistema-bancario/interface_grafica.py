@@ -17,6 +17,7 @@ def janelaPrincipal():
         valor = float(valor.get())
         user_list = []
         cpf = "12345"
+        nConta = 1234
         cursor.execute(f'select * from conta where cpf = {cpf}')
 
         for x in cursor:
@@ -29,7 +30,9 @@ def janelaPrincipal():
                 print('Saldo insuficiente')
             else:
                 saldo = (saldo-valor)
-                cursor.execute(f'UPDATE Conta SET saldo = {saldo} WHERE cpf = {cpf}')
+                cursor.execute(f'UPDATE Conta SET saldo = {saldo} WHERE cpf = {cpf};')
+                cursor.nextset()
+                cursor.execute(f'INSERT INTO transacao (nConta, tipo, valor) VALUES ({nConta}, "Saque", {valor});')
                 con.commit()
                 print('Saque efetuado com sucesso')
         else:
@@ -39,6 +42,7 @@ def janelaPrincipal():
         valor = float(valor.get())
         user_list = []
         cpf = "12345"
+        nConta = 1234
         cursor.execute(f'select * from conta where cpf = {cpf}')
 
         for x in cursor:
@@ -49,11 +53,23 @@ def janelaPrincipal():
             #valor = float(input('Digite o valor para saque'))
             saldo = (saldo+valor)
             cursor.execute(f'UPDATE Conta SET saldo = {saldo} WHERE cpf = {cpf}')
+            cursor.nextset()
+            cursor.execute(f'INSERT INTO transacao (nConta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
             con.commit()
             print('Depósito efetuado com sucesso')
         else:
             print('Conta ou senha incorreta\nVerifique os dados e tente novamente')
 
+    def extrato():
+        user_list = []
+        extrato = []
+        nConta = 1234
+        cursor.execute(f'select tipo, valor from transacao where nConta = {nConta}')
+
+        for x in cursor:
+            extrato.append(x)
+        return extrato
+        
     def janelaSacar():
         # lembrar de verificar qual o tipo de conta
         
@@ -94,6 +110,8 @@ def janelaPrincipal():
         btnCancelar.place(x=160, y=150)
         
     def janelaExtrato():
+
+        text_extrato = extrato()
         # lembrar de verificar qual o tipo de conta
         janela6 = Toplevel(janela)
         janela6.title("SGB ")
@@ -101,6 +119,13 @@ def janelaPrincipal():
         
         texto = Label(janela6, text=" Extrato ")
         texto.place(x=70, y=20)
+
+        index = 40
+        for e in range(len(text_extrato)):
+            # print(text_extrato[e])
+            lista = Label(janela6, text=f'{text_extrato[e]}\n')
+            lista.place(x=70, y=index)
+            index+=20
         
     def janelaEntrar():
         janela2 = Toplevel(janela)
