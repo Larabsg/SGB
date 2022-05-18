@@ -6,5 +6,6 @@ CREATE TABLE `conta` (
     `cpf` VARCHAR(30) NOT NULL,
     `senha` VARCHAR(30) NOT NULL,
     `nConta` int UNIQUE NOT NULL, 
-    `saldo` DOUBLE NOT NULL
+    `saldo` DOUBLE NOT NULL,
+    `tipoConta` VARCHAR(30) NOT NULL
 ) 
