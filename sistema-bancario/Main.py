@@ -1,3 +1,5 @@
+import Conta
+
 from tkinter import *
 from tkinter.ttk import *
 
@@ -22,7 +24,7 @@ def janelaPrincipal():
         btnConfirmar.place(x=50, y=150)
         
         btnCancelar = Button(janela4, text="Cancelar")
-        btnCancelar.place(x=160, y=150)
+        btnCancelar.place(x=160, y=150) 
 
     
     def janelaDepositar():
@@ -42,6 +44,7 @@ def janelaPrincipal():
         
         btnCancelar = Button(janela5, text="Cancelar")
         btnCancelar.place(x=160, y=150)
+        
     def janelaExtrato():
         # lembrar de verificar qual o tipo de conta
         janela6 = Toplevel(janela)
@@ -56,8 +59,7 @@ def janelaPrincipal():
         janela2.title("Bem Vindo, xxxx! ")
         janela2.geometry("300x240")
 
-        input2 = Entry(janela2, width=25)
-        input2.place(x=70, y= 30)
+        
         
         btnSacar = Button(janela2, text="Sacar", command=janelaSacar)
         btnSacar.place(x=100, y=100)
@@ -67,72 +69,94 @@ def janelaPrincipal():
         
         btnExtrato = Button(janela2, text="Extrato", command=janelaExtrato)
         btnExtrato.place(x=160, y=150)
-
-        
-        
+    
 
     
     def janelaCadastrar():
         janela3 = Toplevel(janela)
 
         janela3.title("Cadastrar-se")
-        janela3.geometry("300x240")
+        janela3.geometry("300x300")
 
         textoInicial = Label(janela3, text=" Cadastrar-se! ")
-        textoInicial.grid(column=1, row=0)
+        textoInicial.place(x=100, y =10)
 
         nome = Label(janela3, text="Nome completo: ")
-        nome.grid(column=0, row=1)
-        
+        nome.place(x=20, y =40)
 
-        input1 = Entry(janela3, width=25)
-        input1.grid(column=1, row=1)
+        inputNome = Entry(janela3, width=25)
+        inputNome.place(x=120, y =40)
 
         cpf = Label(janela3, text="CPF: ")
-        cpf.grid(column=0, row=2)
+        cpf.place(x=20, y =70)
 
-        input2 = Entry(janela3, width=25)
-        input2.grid(column=1, row=2)
+        inputCpf = Entry(janela3, width=25)
+        inputCpf.place(x=120, y =70)
 
         senha = Label(janela3, text="Senha: ")
-        senha.grid(column=0, row=3)
+        senha.place(x=20, y =100)
 
-        input3 = Entry(janela3, width=25)
-        input3.grid(column=1, row=3)
+        inputSenha = Entry(janela3, width=25)
+        inputSenha.place(x=120, y =100)
 
+        nConta = Label(janela3, text="Nº conta: ")
+        nConta.place(x=20, y =130)
+
+        inputnConta = Entry(janela3, width=25)
+        inputnConta.place(x=120, y =130)
+        
+        saldo = Label(janela3, text=" Saldo: ")
+        saldo.place(x=20, y=165)
+        
+        inputSaldo = Entry(janela3, width=25)
+        inputSaldo.place(x=120, y= 165)
+        
         # radiubuttons
         v0 = IntVar()
         v0.set(1)
         r1 = Radiobutton(janela3, text="Corrente", variable=v0, value=1)
         r2 = Radiobutton(janela3, text="Poupança", variable=v0, value=2)
-        r1.place(x=100, y=100)
-        r2.place(x=180, y=100)
-
+        r1.place(x=70, y=200)
+        r2.place(x=150, y=200)
+        
+        tipoConta = 'undefinied'
+        
+        if r1 is not None:
+            tipoConta = 'corrente'
+        elif r2 is not None:
+            tipoConta = 'poupança'
+        else:
+            tipoConta = 'undefinied'
+        
         btnCadastrar = Button(janela3, text="Cadastrar", command=janelaEntrar)
-        btnCadastrar.place(x=120, y=130)
-
+        btnCadastrar.place(x=100, y=230)
+        
+     
+        c1 = Conta()
+        c1.depositar
+            
     janela.title("Sistema Bancário")
 
     texto = Label(janela, text=" Bem Vindo! ")
-    texto.grid(column=1, row=0)
+    texto.place(x=100, y =10)
 
     nConta = Label(janela, text="Nº conta: ")
-    nConta.grid(column=0, row=1)
+    nConta.place(x=20, y =40)
 
     input1 = Entry(janela, width=25)
-    input1.grid(column=1, row=1)
+    input1.place(x=90, y =40)
 
     senha = Label(janela, text="Senha: ")
-    senha.grid(column=0, row=3)
+    senha.place(x=20, y =70)
 
     input2 = Entry(janela, width=25)
-    input2.grid(column=1, row=3)
+    input2.place(x=90, y =70)
 
     btn = Button(janela, text="Entrar", command=janelaEntrar)
-    btn.grid(column=1, row=4)
+    btn.place(x=40, y =150)
 
     btnCadastro = Button(janela, text="Cadastrar-se", command=janelaCadastrar)
-    btnCadastro.grid(column=1, row=5)
+    btnCadastro.place(x=150, y =150)
 
     # fechando a janela principal
     mainloop()

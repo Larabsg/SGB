@@ -13,7 +13,8 @@ class ContaCorrente(Conta.Conta):
         self.__chequeEspecial = chequeEspecial
 
     def sacar(self, saldo, saque, chequeEspecial):
-        if(chequeEspecial == True):
-            saldo = saldo - saque
+        if(self.chequeEspecial == True):
+            self.saldo -= saque
             # chamar metodo updateSaldo
+    
     
