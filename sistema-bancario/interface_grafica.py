@@ -35,6 +35,25 @@ def janelaPrincipal():
         else:
             print('Conta ou senha incorreta\nVerifique os dados e tente novamente')
 
+    def depositar(valor):
+        valor = float(valor.get())
+        user_list = []
+        cpf = "12345"
+        cursor.execute(f'select * from conta where cpf = {cpf}')
+
+        for x in cursor:
+            user_list.append(x)
+        if user_list.__len__() == 1:
+            #saldo = str(user_list)
+            saldo = user_list[0][5]
+            #valor = float(input('Digite o valor para saque'))
+            saldo = (saldo+valor)
+            cursor.execute(f'UPDATE Conta SET saldo = {saldo} WHERE cpf = {cpf}')
+            con.commit()
+            print('Depósito efetuado com sucesso')
+        else:
+            print('Conta ou senha incorreta\nVerifique os dados e tente novamente')
+
     def janelaSacar():
         # lembrar de verificar qual o tipo de conta
         
@@ -65,10 +84,10 @@ def janelaPrincipal():
         texto = Label(janela5, text=" Quanto gostaria de depositar ? ")
         texto.place(x=70, y=20)
         
-        input1 = Entry(janela5, width=25)
-        input1.place(x=70, y= 50)
+        valor = Entry(janela5, width=25)
+        valor.place(x=70, y= 50)
         
-        btnConfirmar = Button(janela5, text="Confirmar")
+        btnConfirmar = Button(janela5, text="Confirmar", command=partial(depositar, valor))
         btnConfirmar.place(x=50, y=150)
         
         btnCancelar = Button(janela5, text="Cancelar")
