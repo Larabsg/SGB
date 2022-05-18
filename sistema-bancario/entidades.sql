@@ -8,9 +8,3 @@ CREATE TABLE `conta` (
     `nConta` int UNIQUE NOT NULL, 
     `saldo` DOUBLE NOT NULL
 ) 
-
-
-
-
-
-

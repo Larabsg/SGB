@@ -46,7 +46,15 @@ class Conta():
     def set_tipoConta(self, tipoConta):
         self.__tipoConta = tipoConta
 
-    def depositar(saldo):
-        print ('teste')
+    def depositar(deposito):
+        saldo = saldo + deposito
+        # update no bd
+    
+    def extrato():
+        pass
+        # puxar do bd
+
+    def teste():
+        return 'teste' 
     # def deposito(self):
     # def extrato(self):
