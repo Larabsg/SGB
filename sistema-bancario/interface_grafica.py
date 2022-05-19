@@ -3,7 +3,7 @@ import socket
 
 from ctypes.wintypes import DOUBLE
 from functools import partial
-from tokenize import Double
+from tokenize import Double, String
 #from entidades import conta
 from connection import *
 
@@ -85,7 +85,7 @@ def janelaPrincipal():
         texto = Label(janela6, text=" Extrato ")
         texto.place(x=70, y=20)
 
-    def janelaEntrar():
+    def janelaEntrar(value, nome, cpf, senha, nConta, saldo, tipoConta):
         janela2 = Toplevel(janela)
         janela2.title("Bem Vindo, xxxx! ")
         janela2.geometry("300x240")
@@ -99,6 +99,15 @@ def janelaPrincipal():
 
         btnExtrato = Button(janela2, text="Extrato", command=janelaExtrato)
         btnExtrato.place(x=160, y=150)
+
+        # print(value)
+        conta = Conta(nConta, saldo, cpf, nome, senha, tipoConta)
+        print(conta.get_nConta())
+        print(conta.get_saldo())
+        print(conta.get_cpf())
+        print(conta.get_nome())
+        print(conta.get_senha())
+        print(conta.get_tipoConta())
 
     def janelaCadastrar():
         janela3 = Toplevel(janela)
@@ -139,29 +148,40 @@ def janelaPrincipal():
         inputSaldo = Entry(janela3, width=25)
         inputSaldo.place(x=120, y=165)
 
+        # pegando valores do radiobutton
+        def sel():
+            escolha = v0.get()
+            if escolha == 1:
+                return "corrente"
+            elif escolha == 2:
+                return "poupança"
+            else:
+                return "invalida seleção"
+        
         # radiubuttons
         v0 = IntVar()
         v0.set(1)
-        r1 = Radiobutton(janela3, text="Corrente", variable=v0, value=1)
-        r2 = Radiobutton(janela3, text="Poupança", variable=v0, value=2)
+
+        r1 = Radiobutton(janela3, text="Corrente", variable=v0, value=1, command=sel)
+        r2 = Radiobutton(janela3, text="Poupança", variable=v0, value=2, command=sel)
         r1.place(x=70, y=200)
         r2.place(x=150, y=200)
 
-        btnCadastrar = Button(janela3, text="Cadastrar", command=janelaEntrar)
+        btnCadastrar = Button(janela3, text="Cadastrar", command=lambda
+                              value="cadastrar": janelaEntrar(value, inputNome.get(), inputCpf.get(),
+                                                              inputSenha.get(), inputnConta.get(), inputSaldo.get(), sel()))
         btnCadastrar.place(x=100, y=230)
 
-        def main():
-            if(inputnConta.get() != 0 and inputSaldo.get() != 0 and inputCpf.get() != 0
-               and inputNome.get() != 0 and inputSenha.get() != 0):
-                
-                conta = Conta(inputnConta.get(), inputSaldo.get(), inputCpf.get(), inputNome.get(), inputSenha.get(), "Corrente")
-                
-                # conta = Conta(145, 100.1, 2615.26, 'mel', 'sneha', "Corrente")
-                print(conta.get_saldo())
+        # def main():
 
-        if __name__ == '__main__':
+        # conta = Conta(inputnConta.get(), inputSaldo.get(), inputCpf.get(), inputNome.get(), inputSenha.get(), "Corrente")
 
-            main()
+        # conta = Conta(145, 100.1, 2615.26, 'mel', 'sneha', "Corrente")
+        # print(conta.get_saldo())
+
+        # if __name__ == '__main__':
+
+        # main()
 
     janela.title("Sistema Bancário")
 
