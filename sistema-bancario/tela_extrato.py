@@ -1,15 +1,10 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
-#import conta
-#from entidades import conta
-#from connection import *
 from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
-from interface_grafica import *
-from interface_grafica import janela
 
 def extrato():
         user_list = []
@@ -21,7 +16,7 @@ def extrato():
             extrato.append(x)
         return extrato
 
-def janelaExtrato():
+def janelaExtrato(janela):
 
         text_extrato = extrato()
         # lembrar de verificar qual o tipo de conta

@@ -1,18 +1,13 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
-#import conta
-#from entidades import conta
-#from connection import *
 from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
-from interface_grafica import *
-from interface_grafica import janela
-from tela_incial import *
+import tela_incial
 
-def janelaCadastrar():
+def janelaCadastrar(janela):
         janela3 = Toplevel(janela)
 
         janela3.title("Cadastrar-se")
@@ -67,5 +62,5 @@ def janelaCadastrar():
         else:
             tipoconta = 'undefinied'
         
-        btnCadastrar = Button(janela3, text="Cadastrar", command=janelaEntrar)
+        btnCadastrar = Button(janela3, text="Cadastrar", command=partial(tela_incial.janelaEntrar, janela))
         btnCadastrar.place(x=100, y=230)

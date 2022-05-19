@@ -1,15 +1,10 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
-#import conta
-#from entidades import conta
-#from connection import *
 from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
-from interface_grafica import *
-from interface_grafica import janela
 
 def depositar(valor):
         valor = float(valor.get())
@@ -33,7 +28,7 @@ def depositar(valor):
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaDepositar():
+def janelaDepositar(janela):
         # lembrar de verificar qual o tipo de conta
         janela5 = Toplevel(janela)
         janela5.title("SGB ")

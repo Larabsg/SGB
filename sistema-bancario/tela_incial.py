@@ -1,25 +1,18 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
-#import conta
-#from entidades import conta
-#from connection import *
 from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
-from interface_grafica import *
-from interface_grafica import janela
-from tela_sacar import *
-from tela_depositar import *
-from tela_extrato import *
+import tela_sacar
+import tela_depositar
+import tela_extrato
 
-def janelaEntrar(nConta):
+def janelaEntrar(janela, nConta):
 
-        #nConta = int(nConta.get())
         cur.execute(f'select nome, saldo from conta where nConta = {nConta}')
         info = cur.fetchall()
-        print(info)
         janela2 = Toplevel(janela)
         janela2.title(f"Bem Vindo, {info[0][0]}! ")
         janela2.geometry("300x240")
@@ -30,11 +23,11 @@ def janelaEntrar(nConta):
         texto_saldo = Label(janela2, text=f"Saldo = {info[0][1]}")
         texto_saldo.place(x=70, y=40)
 
-        btnSacar = Button(janela2, text="Sacar", command=janelaSacar)
+        btnSacar = Button(janela2, text="Sacar", command=partial(tela_sacar.janelaSacar, janela))
         btnSacar.place(x=100, y=100)
 
-        btnDepositar = Button(janela2, text="Depositar", command=janelaDepositar)
+        btnDepositar = Button(janela2, text="Depositar", command=partial(tela_depositar.janelaDepositar, janela))
         btnDepositar.place(x=50, y=150)
         
-        btnExtrato = Button(janela2, text="Extrato", command=janelaExtrato)
+        btnExtrato = Button(janela2, text="Extrato", command=partial(tela_extrato.janelaExtrato, janela))
         btnExtrato.place(x=160, y=150)

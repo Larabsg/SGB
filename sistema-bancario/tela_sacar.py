@@ -1,15 +1,11 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
-#import conta
-#from entidades import conta
-#from connection import *
 from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
-from interface_grafica import *
-from interface_grafica import janela
+
 
 def sacar(valor):
         valor = float(valor.get())
@@ -36,7 +32,7 @@ def sacar(valor):
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaSacar():
+def janelaSacar(janela):
         # lembrar de verificar qual o tipo de conta
         
         janela4 = Toplevel(janela)
