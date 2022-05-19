@@ -1,3 +1,4 @@
+from cgitb import text
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
@@ -29,7 +30,6 @@ def janelaExtrato(janela, nConta):
 
         index = 40
         for e in range(len(text_extrato)):
-            # print(text_extrato[e])
-            lista = Label(janela6, text=f'{text_extrato[e]}\n')
+            lista = Label(janela6, text=f'{text_extrato[e][0]} ........................ {text_extrato[e][1]}\n')
             lista.place(x=70, y=index)
             index+=20

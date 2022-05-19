@@ -2,7 +2,6 @@ from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
 from connection_sqlite import *
-
 from tkinter import *
 from tkinter.ttk import *
 import tela_sacar
