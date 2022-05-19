@@ -8,232 +8,282 @@ from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
-
+from telas import *
+from telas.tela_login import *
+from telas.tela_cadastro import *
 
 def janelaPrincipal():
+    global janela
     janela = Tk()
     janela.geometry("300x240")
 
-    def sacar(valor):
-        valor = float(valor.get())
-        user_list = []
-        cpf = "12345"
-        nconta = 1234
-        cur.execute(f'select * from conta where cpf = {cpf}')
+    # def sacar(valor):
+    #     valor = float(valor.get())
+    #     user_list = []
+    #     cpf = "12345"
+    #     nconta = 1234
+    #     cur.execute(f'select * from conta where cpf = {cpf}')
 
-        for x in cur:
-            user_list.append(x)
-        if user_list.__len__() == 1:
-            #saldo = str(user_list)
-            saldo = user_list[0][5]
-            #valor = float(input('Digite o valor para saque'))
-            if(saldo-valor) < 0:
-                print('Saldo insuficiente')
-            else:
-                saldo = (saldo-valor)
-                cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf};')
-                cur.nextset()
-                cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Saque", {valor});')
-                con_sqlite.commit()
-                print('Saque efetuado com sucesso')
-        else:
-            print('conta ou senha incorreta\nVerifique os dados e tente novamente')
+    #     for x in cur:
+    #         user_list.append(x)
+    #     if user_list.__len__() == 1:
+    #         #saldo = str(user_list)
+    #         saldo = user_list[0][5]
+    #         #valor = float(input('Digite o valor para saque'))
+    #         if(saldo-valor) < 0:
+    #             print('Saldo insuficiente')
+    #         else:
+    #             saldo = (saldo-valor)
+    #             cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf};')
+    #             #cur.nextset()
+    #             cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Saque", {valor});')
+    #             con_sqlite.commit()
+    #             print('Saque efetuado com sucesso')
+    #     else:
+    #         print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-    def depositar(valor):
-        valor = float(valor.get())
-        user_list = []
-        cpf = "12345"
-        nconta = 1234
-        cur.execute(f'select * from conta where cpf = {cpf}')
+    # def depositar(valor):
+    #     valor = float(valor.get())
+    #     user_list = []
+    #     cpf = "12345"
+    #     nconta = 1234
+    #     cur.execute(f'select * from conta where cpf = {cpf}')
 
-        for x in cur:
-            user_list.append(x)
-        if user_list.__len__() == 1:
-            #saldo = str(user_list)
-            saldo = user_list[0][5]
-            #valor = float(input('Digite o valor para saque'))
-            saldo = (saldo+valor)
-            cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf}')
-            cur.nextset()
-            cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Depósito", {valor});')
-            con_sqlite.commit()
-            print('Depósito efetuado com sucesso')
-        else:
-            print('conta ou senha incorreta\nVerifique os dados e tente novamente')
+    #     for x in cur:
+    #         user_list.append(x)
+    #     if user_list.__len__() == 1:
+    #         #saldo = str(user_list)
+    #         saldo = user_list[0][5]
+    #         #valor = float(input('Digite o valor para saque'))
+    #         saldo = (saldo+valor)
+    #         cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf}')
+    #         #cur.nextset()
+    #         cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Depósito", {valor});')
+    #         con_sqlite.commit()
+    #         print('Depósito efetuado com sucesso')
+    #     else:
+    #         print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-    def extrato():
-        user_list = []
-        extrato = []
-        nconta = 1234
-        cur.execute(f'select tipo, valor from transacao where nconta = {nconta}')
+    # def extrato():
+    #     user_list = []
+    #     extrato = []
+    #     nconta = 1234
+    #     cur.execute(f'select tipo, valor from transacao where nconta = {nconta}')
 
-        for x in cur:
-            extrato.append(x)
-        return extrato
+    #     for x in cur:
+    #         extrato.append(x)
+    #     return extrato
         
-    def janelaSacar():
-        # lembrar de verificar qual o tipo de conta
+    # def janelaSacar():
+    #     # lembrar de verificar qual o tipo de conta
         
-        janela4 = Toplevel(janela)
-        janela4.title("SGB ")
-        janela4.geometry("300x240")
+    #     janela4 = Toplevel(janela)
+    #     janela4.title("SGB ")
+    #     janela4.geometry("300x240")
         
-        texto = Label(janela4, text=" Quanto gostaria de sacar? ")
-        texto.place(x=70, y=20)
+    #     texto = Label(janela4, text=" Quanto gostaria de sacar? ")
+    #     texto.place(x=70, y=20)
         
         
-        valor = Entry(janela4, width=25)
-        valor.place(x=70, y= 50)
+    #     valor = Entry(janela4, width=25)
+    #     valor.place(x=70, y= 50)
 
-        btnconfirmar = Button(janela4, text="confirmar", command=partial(sacar, valor))
-        btnconfirmar.place(x=50, y=150)
+    #     btnconfirmar = Button(janela4, text="confirmar", command=partial(sacar, valor))
+    #     btnconfirmar.place(x=50, y=150)
         
-        btnCancelar = Button(janela4, text="Cancelar")
-        btnCancelar.place(x=160, y=150)
+    #     btnCancelar = Button(janela4, text="Cancelar")
+    #     btnCancelar.place(x=160, y=150)
 
     
-    def janelaDepositar():
-        # lembrar de verificar qual o tipo de conta
-        janela5 = Toplevel(janela)
-        janela5.title("SGB ")
-        janela5.geometry("300x240")
+    # def janelaDepositar():
+    #     # lembrar de verificar qual o tipo de conta
+    #     janela5 = Toplevel(janela)
+    #     janela5.title("SGB ")
+    #     janela5.geometry("300x240")
         
-        texto = Label(janela5, text=" Quanto gostaria de depositar ? ")
-        texto.place(x=70, y=20)
+    #     texto = Label(janela5, text=" Quanto gostaria de depositar ? ")
+    #     texto.place(x=70, y=20)
         
-        valor = Entry(janela5, width=25)
-        valor.place(x=70, y= 50)
+    #     valor = Entry(janela5, width=25)
+    #     valor.place(x=70, y= 50)
         
-        btnconfirmar = Button(janela5, text="confirmar", command=partial(depositar, valor))
-        btnconfirmar.place(x=50, y=150)
+    #     btnconfirmar = Button(janela5, text="confirmar", command=partial(depositar, valor))
+    #     btnconfirmar.place(x=50, y=150)
         
-        btnCancelar = Button(janela5, text="Cancelar")
-        btnCancelar.place(x=160, y=150)
+    #     btnCancelar = Button(janela5, text="Cancelar")
+    #     btnCancelar.place(x=160, y=150)
         
-    def janelaExtrato():
+    # def janelaExtrato():
 
-        text_extrato = extrato()
-        # lembrar de verificar qual o tipo de conta
-        janela6 = Toplevel(janela)
-        janela6.title("SGB ")
-        janela6.geometry("300x240")
+    #     text_extrato = extrato()
+    #     # lembrar de verificar qual o tipo de conta
+    #     janela6 = Toplevel(janela)
+    #     janela6.title("SGB ")
+    #     janela6.geometry("300x240")
         
-        texto = Label(janela6, text=" Extrato ")
-        texto.place(x=70, y=20)
+    #     texto = Label(janela6, text=" Extrato ")
+    #     texto.place(x=70, y=20)
 
-        index = 40
-        for e in range(len(text_extrato)):
-            # print(text_extrato[e])
-            lista = Label(janela6, text=f'{text_extrato[e]}\n')
-            lista.place(x=70, y=index)
-            index+=20
+    #     index = 40
+    #     for e in range(len(text_extrato)):
+    #         # print(text_extrato[e])
+    #         lista = Label(janela6, text=f'{text_extrato[e]}\n')
+    #         lista.place(x=70, y=index)
+    #         index+=20
+
+    # def verifica_login(nConta, senha):
         
-    def janelaEntrar():
-        janela2 = Toplevel(janela)
-        janela2.title("Bem Vindo, xxxx! ")
-        janela2.geometry("300x240")
+    #     nConta = int(nConta.get())
+    #     print(type(nConta))
+    #     cur.execute(f"SELECT senha from conta where nConta = {nConta}")
+    #     senha_bd = cur.fetchall()
+    #     print(senha_bd[0][0])
+    #     if senha.get() == senha_bd[0][0]:
+    #         janelaEntrar(nConta)
+    #     else:
+    #         janelaLogin(message="Usuário ou senha inválidos! Tente novamente")
 
         
         
-        btnSacar = Button(janela2, text="Sacar", command=janelaSacar)
-        btnSacar.place(x=100, y=100)
+    # def janelaEntrar(nConta):
 
-        btnDepositar = Button(janela2, text="Depositar", command=janelaDepositar)
-        btnDepositar.place(x=50, y=150)
+    #     #nConta = int(nConta.get())
+    #     cur.execute(f'select nome, saldo from conta where nConta = {nConta}')
+    #     info = cur.fetchall()
+    #     print(info)
+    #     janela2 = Toplevel(janela)
+    #     janela2.title(f"Bem Vindo, {info[0][0]}! ")
+    #     janela2.geometry("300x240")
+
+    #     texto = Label(janela2, text=f"Bem Vindo, {info[0][0]}! ")
+    #     texto.place(x=70, y=20)
+
+    #     texto_saldo = Label(janela2, text=f"Saldo = {info[0][1]}")
+    #     texto_saldo.place(x=70, y=40)
+
+    #     btnSacar = Button(janela2, text="Sacar", command=janelaSacar)
+    #     btnSacar.place(x=100, y=100)
+
+    #     btnDepositar = Button(janela2, text="Depositar", command=janelaDepositar)
+    #     btnDepositar.place(x=50, y=150)
         
-        btnExtrato = Button(janela2, text="Extrato", command=janelaExtrato)
-        btnExtrato.place(x=160, y=150)
+    #     btnExtrato = Button(janela2, text="Extrato", command=janelaExtrato)
+    #     btnExtrato.place(x=160, y=150)
     
 
     
-    def janelaCadastrar():
-        janela3 = Toplevel(janela)
+    # def janelaCadastrar():
+    #     janela3 = Toplevel(janela)
 
-        janela3.title("Cadastrar-se")
-        janela3.geometry("300x300")
+    #     janela3.title("Cadastrar-se")
+    #     janela3.geometry("300x300")
 
-        textoInicial = Label(janela3, text=" Cadastrar-se! ")
-        textoInicial.place(x=100, y =10)
+    #     textoInicial = Label(janela3, text=" Cadastrar-se! ")
+    #     textoInicial.place(x=100, y =10)
 
-        nome = Label(janela3, text="Nome completo: ")
-        nome.place(x=20, y =40)
+    #     nome = Label(janela3, text="Nome completo: ")
+    #     nome.place(x=20, y =40)
 
-        inputNome = Entry(janela3, width=25)
-        inputNome.place(x=120, y =40)
+    #     inputNome = Entry(janela3, width=25)
+    #     inputNome.place(x=120, y =40)
 
-        cpf = Label(janela3, text="CPF: ")
-        cpf.place(x=20, y =70)
+    #     cpf = Label(janela3, text="CPF: ")
+    #     cpf.place(x=20, y =70)
 
-        inputCpf = Entry(janela3, width=25)
-        inputCpf.place(x=120, y =70)
+    #     inputCpf = Entry(janela3, width=25)
+    #     inputCpf.place(x=120, y =70)
 
-        senha = Label(janela3, text="Senha: ")
-        senha.place(x=20, y =100)
+    #     senha = Label(janela3, text="Senha: ")
+    #     senha.place(x=20, y =100)
 
-        inputSenha = Entry(janela3, width=25)
-        inputSenha.place(x=120, y =100)
+    #     inputSenha = Entry(janela3, width=25)
+    #     inputSenha.place(x=120, y =100)
 
-        nconta = Label(janela3, text="Nº conta: ")
-        nconta.place(x=20, y =130)
+    #     nconta = Label(janela3, text="Nº conta: ")
+    #     nconta.place(x=20, y =130)
 
-        inputnconta = Entry(janela3, width=25)
-        inputnconta.place(x=120, y =130)
+    #     inputnconta = Entry(janela3, width=25)
+    #     inputnconta.place(x=120, y =130)
         
-        saldo = Label(janela3, text=" Saldo: ")
-        saldo.place(x=20, y=165)
+    #     saldo = Label(janela3, text=" Saldo: ")
+    #     saldo.place(x=20, y=165)
         
-        inputSaldo = Entry(janela3, width=25)
-        inputSaldo.place(x=120, y= 165)
+    #     inputSaldo = Entry(janela3, width=25)
+    #     inputSaldo.place(x=120, y= 165)
+    
+    # def janelaLogin(message=""):
+    #     janela10 = Toplevel(janela)
+    #     janela10.title("Login")
+    #     janela10.geometry("300x300")
+    #     nconta = Label(janela10, text="Nº conta: ")
+    #     nconta.place(x=20, y =40)
+
+    #     login = Entry(janela10, width=25)
+    #     login.place(x=90, y =40)
+
+    #     senha = Label(janela10, text="Senha: ")
+    #     senha.place(x=20, y =70)
+
+    #     passwd = Entry(janela10, width=25)
+    #     passwd.place(x=90, y =70)
+
+    #     btn = Button(janela10, text="Entrar", command=lambda: verifica_login(login, passwd))
+    #     btn.place(x=40, y =150)
+
+    #     if message != "":
+    #         messagem = Label(janela10, text=message)
+    #         messagem.place(x=20, y=190)
         
         # radiubuttons
-        v0 = IntVar()
-        v0.set(1)
-        r1 = Radiobutton(janela3, text="Corrente", variable=v0, value=1)
-        r2 = Radiobutton(janela3, text="Poupança", variable=v0, value=2)
-        r1.place(x=70, y=200)
-        r2.place(x=150, y=200)
+        # v0 = IntVar()
+        # v0.set(1)
+        # r1 = Radiobutton(janela3, text="Corrente", variable=v0, value=1)
+        # r2 = Radiobutton(janela3, text="Poupança", variable=v0, value=2)
+        # r1.place(x=70, y=200)
+        # r2.place(x=150, y=200)
         
-        tipoconta = 'undefinied'
+        # tipoconta = 'undefinied'
         
-        if r1 is not None:
-            tipoconta = 'corrente'
-        elif r2 is not None:
-            tipoconta = 'poupança'
-        else:
-            tipoconta = 'undefinied'
+        # if r1 is not None:
+        #     tipoconta = 'corrente'
+        # elif r2 is not None:
+        #     tipoconta = 'poupança'
+        # else:
+        #     tipoconta = 'undefinied'
         
-        btnCadastrar = Button(janela3, text="Cadastrar", command=janelaEntrar)
-        btnCadastrar.place(x=100, y=230)
+        # btnCadastrar = Button(janela3, text="Cadastrar", command=janelaEntrar)
+        # btnCadastrar.place(x=100, y=230)
         
      
-        c1 = conta()
-        c1.depositar
-            
+        # c1 = conta()
+        # c1.depositar
     janela.title("Sistema Bancário")
 
     texto = Label(janela, text=" Bem Vindo! ")
     texto.place(x=100, y =10)
 
-    nconta = Label(janela, text="Nº conta: ")
-    nconta.place(x=20, y =40)
+    # nconta = Label(janela, text="Nº conta: ")
+    # nconta.place(x=20, y =40)
 
-    input1 = Entry(janela, width=25)
-    input1.place(x=90, y =40)
+    # login = Entry(janela, width=25)
+    # login.place(x=90, y =40)
 
-    senha = Label(janela, text="Senha: ")
-    senha.place(x=20, y =70)
+    # senha = Label(janela, text="Senha: ")
+    # senha.place(x=20, y =70)
 
-    input2 = Entry(janela, width=25)
-    input2.place(x=90, y =70)
+    # passwd = Entry(janela, width=25)
+    # passwd.place(x=90, y =70)
 
-    btn = Button(janela, text="Entrar", command=janelaEntrar)
+    # login = int(login.get())
+
+    btn = Button(janela, text="Entrar", command=janelaLogin)
     btn.place(x=40, y =150)
 
     btnCadastro = Button(janela, text="Cadastrar-se", command=janelaCadastrar)
     btnCadastro.place(x=150, y =150)
-
+    
     # fechando a janela principal
     mainloop()
 
 
-janelaPrincipal()
+# janelaPrincipal()
