@@ -85,7 +85,11 @@ def janelaPrincipal():
         texto = Label(janela6, text=" Extrato ")
         texto.place(x=70, y=20)
 
+<<<<<<< HEAD:sistema-bancario/interface_grafica.py
     def janelaEntrar(value, nome, cpf, senha, nConta, saldo, tipoConta):
+=======
+    def janelaEntrar(value):
+>>>>>>> 331e9730a888ce2a1e2b632907efcfd68ab51651:sistema-bancario/interface-grafica.py
         janela2 = Toplevel(janela)
         janela2.title("Bem Vindo, xxxx! ")
         janela2.geometry("300x240")
@@ -100,6 +104,7 @@ def janelaPrincipal():
         btnExtrato = Button(janela2, text="Extrato", command=janelaExtrato)
         btnExtrato.place(x=160, y=150)
 
+<<<<<<< HEAD:sistema-bancario/interface_grafica.py
         # print(value)
         conta = Conta(nConta, saldo, cpf, nome, senha, tipoConta)
         print(conta.get_nConta())
@@ -108,6 +113,9 @@ def janelaPrincipal():
         print(conta.get_nome())
         print(conta.get_senha())
         print(conta.get_tipoConta())
+=======
+        print(value)
+>>>>>>> 331e9730a888ce2a1e2b632907efcfd68ab51651:sistema-bancario/interface-grafica.py
 
     def janelaCadastrar():
         janela3 = Toplevel(janela)
@@ -167,6 +175,7 @@ def janelaPrincipal():
         r1.place(x=70, y=200)
         r2.place(x=150, y=200)
 
+<<<<<<< HEAD:sistema-bancario/interface_grafica.py
         btnCadastrar = Button(janela3, text="Cadastrar", command=lambda
                               value="cadastrar": janelaEntrar(value, inputNome.get(), inputCpf.get(),
                                                               inputSenha.get(), inputnConta.get(), inputSaldo.get(), sel()))
@@ -182,6 +191,22 @@ def janelaPrincipal():
         # if __name__ == '__main__':
 
         # main()
+=======
+        btnCadastrar = Button(janela3, text="Cadastrar", command=lambda value="cadastrar":janelaEntrar(value))
+        btnCadastrar.place(x=100, y=230)
+
+        
+        def main():
+                
+            # conta = Conta(inputnConta.get(), inputSaldo.get(), inputCpf.get(), inputNome.get(), inputSenha.get(), "Corrente")
+                
+            conta = Conta(145, 100.1, 2615.26, 'mel', 'sneha', "Corrente")
+            # print(conta.get_saldo())
+
+        if __name__ == '__main__':
+            
+            main()
+>>>>>>> 331e9730a888ce2a1e2b632907efcfd68ab51651:sistema-bancario/interface-grafica.py
 
     janela.title("Sistema Bancário")
 
