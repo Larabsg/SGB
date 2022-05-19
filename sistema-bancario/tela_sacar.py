@@ -7,12 +7,12 @@ from tkinter import *
 from tkinter.ttk import *
 
 
-def sacar(valor):
+def sacar(valor, nConta):
         valor = float(valor.get())
         user_list = []
-        cpf = "12345"
-        nconta = 1234
-        cur.execute(f'select * from conta where cpf = {cpf}')
+        # cpf = "12345"
+        # nconta = 1234
+        cur.execute(f'select * from conta where nConta = {nConta}')
 
         for x in cur:
             user_list.append(x)
@@ -24,15 +24,15 @@ def sacar(valor):
                 print('Saldo insuficiente')
             else:
                 saldo = (saldo-valor)
-                cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf};')
+                cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta};')
                 #cur.nextset()
-                cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Saque", {valor});')
+                cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {valor});')
                 con_sqlite.commit()
                 print('Saque efetuado com sucesso')
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaSacar(janela):
+def janelaSacar(janela, nConta):
         # lembrar de verificar qual o tipo de conta
         
         janela4 = Toplevel(janela)
@@ -46,7 +46,7 @@ def janelaSacar(janela):
         valor = Entry(janela4, width=25)
         valor.place(x=70, y= 50)
 
-        btnconfirmar = Button(janela4, text="confirmar", command=partial(sacar, valor))
+        btnconfirmar = Button(janela4, text="confirmar", command=partial(sacar, valor,  nConta))
         btnconfirmar.place(x=50, y=150)
         
         btnCancelar = Button(janela4, text="Cancelar")

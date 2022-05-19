@@ -6,12 +6,12 @@ from connection_sqlite import *
 from tkinter import *
 from tkinter.ttk import *
 
-def depositar(valor):
+def depositar(valor, nConta):
         valor = float(valor.get())
         user_list = []
-        cpf = "12345"
-        nconta = 1234
-        cur.execute(f'select * from conta where cpf = {cpf}')
+        # cpf = "12345"
+        # nconta = 1234
+        cur.execute(f'select * from conta where nConta = {nConta}')
 
         for x in cur:
             user_list.append(x)
@@ -20,15 +20,15 @@ def depositar(valor):
             saldo = user_list[0][5]
             #valor = float(input('Digite o valor para saque'))
             saldo = (saldo+valor)
-            cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE cpf = {cpf}')
+            cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
             #cur.nextset()
-            cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nconta}, "Depósito", {valor});')
+            cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
             con_sqlite.commit()
             print('Depósito efetuado com sucesso')
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaDepositar(janela):
+def janelaDepositar(janela, nConta):
         # lembrar de verificar qual o tipo de conta
         janela5 = Toplevel(janela)
         janela5.title("SGB ")
@@ -40,7 +40,7 @@ def janelaDepositar(janela):
         valor = Entry(janela5, width=25)
         valor.place(x=70, y= 50)
         
-        btnconfirmar = Button(janela5, text="confirmar", command=partial(depositar, valor))
+        btnconfirmar = Button(janela5, text="confirmar", command=partial(depositar, valor, nConta))
         btnconfirmar.place(x=50, y=150)
         
         btnCancelar = Button(janela5, text="Cancelar")

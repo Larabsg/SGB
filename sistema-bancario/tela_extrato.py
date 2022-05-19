@@ -6,19 +6,19 @@ from connection_sqlite import *
 from tkinter import *
 from tkinter.ttk import *
 
-def extrato():
+def extrato(nConta):
         user_list = []
         extrato = []
-        nconta = 1234
-        cur.execute(f'select tipo, valor from transacao where nconta = {nconta}')
+        # nconta = 1234
+        cur.execute(f'select tipo, valor from transacao where nconta = {nConta}')
 
         for x in cur:
             extrato.append(x)
         return extrato
 
-def janelaExtrato(janela):
+def janelaExtrato(janela, nConta):
 
-        text_extrato = extrato()
+        text_extrato = extrato(nConta)
         # lembrar de verificar qual o tipo de conta
         janela6 = Toplevel(janela)
         janela6.title("SGB ")

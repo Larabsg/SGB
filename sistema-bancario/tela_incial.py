@@ -23,11 +23,11 @@ def janelaEntrar(janela, nConta):
         texto_saldo = Label(janela2, text=f"Saldo = {info[0][1]}")
         texto_saldo.place(x=70, y=40)
 
-        btnSacar = Button(janela2, text="Sacar", command=partial(tela_sacar.janelaSacar, janela))
+        btnSacar = Button(janela2, text="Sacar", command=partial(tela_sacar.janelaSacar, janela, nConta))
         btnSacar.place(x=100, y=100)
 
-        btnDepositar = Button(janela2, text="Depositar", command=partial(tela_depositar.janelaDepositar, janela))
+        btnDepositar = Button(janela2, text="Depositar", command=partial(tela_depositar.janelaDepositar, janela, nConta))
         btnDepositar.place(x=50, y=150)
         
-        btnExtrato = Button(janela2, text="Extrato", command=partial(tela_extrato.janelaExtrato, janela))
+        btnExtrato = Button(janela2, text="Extrato", command=partial(tela_extrato.janelaExtrato, janela, nConta))
         btnExtrato.place(x=160, y=150)
