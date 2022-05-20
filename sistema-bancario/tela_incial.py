@@ -8,9 +8,11 @@ import tela_sacar
 import tela_depositar
 import tela_extrato
 
-def janelaEntrar(janela, nConta):
+from Conta import Conta
 
-        cur.execute(f'select nome, saldo from conta where nConta = {nConta}')
+def janelaEntrar(value, tipoConta, cpf, nConta, nome, saldo, senha, janela):
+
+        cur.execute(f'select nome, saldo from Conta where nConta = {nConta}')
         info = cur.fetchall()
         janela2 = Toplevel(janela)
         janela2.title(f"Bem Vindo, {info[0][0]}! ")
@@ -30,3 +32,7 @@ def janelaEntrar(janela, nConta):
         
         btnExtrato = Button(janela2, text="Extrato", command=partial(tela_extrato.janelaExtrato, janela, nConta))
         btnExtrato.place(x=160, y=150)
+
+        c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta)
+        
+        print(c1.get_cpf())
