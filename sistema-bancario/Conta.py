@@ -46,6 +46,7 @@ class Conta():
         self.__senha = senha
 
     # METODOS QUE VÃO SER SOBRESCRITOS
+    #Precisa mesmo passar o saldo? O próprio objeto já não tem esse valor?
     def sacar(self, saldo, saque):
     
     def extrato(self):
