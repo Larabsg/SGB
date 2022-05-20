@@ -8,6 +8,8 @@ import tela_sacar
 import tela_depositar
 import tela_extrato
 
+from Conta import Conta
+
 def janelaEntrar(janela, nConta):
 
         cur.execute(f'select nome, saldo from conta where nConta = {nConta}')
