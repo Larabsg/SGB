@@ -54,5 +54,7 @@ class Conta():
         pass
         # puxar do bd
 
+    def teste():
+        return 'teste' 
     # def deposito(self):
     # def extrato(self):
