@@ -25,6 +25,7 @@ def janelaPrincipal():
             user_list.append(x)
         if user_list.__len__() == 1:
             #saldo = str(user_list)
+            print(user_list)
             saldo = user_list[0][5]
             #valor = float(input('Digite o valor para saque'))
             if(saldo-valor) < 0:
