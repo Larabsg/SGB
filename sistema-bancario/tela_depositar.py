@@ -9,19 +9,14 @@ from tkinter.ttk import *
 def depositar(valor, nConta):
         valor = float(valor.get())
         user_list = []
-        # cpf = "12345"
-        # nconta = 1234
         cur.execute(f'select * from conta where nConta = {nConta}')
 
         for x in cur:
             user_list.append(x)
         if user_list.__len__() == 1:
-            #saldo = str(user_list)
             saldo = user_list[0][5]
-            #valor = float(input('Digite o valor para saque'))
             saldo = (saldo+valor)
             cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
-            #cur.nextset()
             cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
             con_sqlite.commit()
             print('Depósito efetuado com sucesso')

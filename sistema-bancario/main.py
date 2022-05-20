@@ -7,7 +7,6 @@ from tkinter import *
 from tkinter.ttk import *
 from tela_login import janelaLogin
 from tela_cadastro import janelaCadastrar
-from tela_incial import janelaEntrar
 
 def janelaPrincipal():
     janela = Tk()

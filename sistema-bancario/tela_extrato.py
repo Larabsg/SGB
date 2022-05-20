@@ -10,7 +10,6 @@ from tkinter.ttk import *
 def extrato(nConta):
         user_list = []
         extrato = []
-        # nconta = 1234
         cur.execute(f'select tipo, valor from transacao where nconta = {nConta}')
 
         for x in cur:

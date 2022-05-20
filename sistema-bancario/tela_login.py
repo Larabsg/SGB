@@ -35,8 +35,11 @@ def verifica_login(janela, nConta, senha):
         nConta = int(nConta.get())
         cur.execute(f"SELECT senha from conta where nConta = {nConta}")
         senha_bd = cur.fetchall()
-        if senha.get() == senha_bd[0][0]:
-            tela_incial.janelaEntrar(janela, nConta)
+        if senha_bd != []:
+            if senha.get() == senha_bd[0][0]:
+                tela_incial.janelaEntrar(janela, nConta)
+            else:
+                janelaLogin(janela, message="Senha inválida! Tente novamente")
         else:
-            janelaLogin(janela, message="Usuário ou senha inválidos! Tente novamente")
+            janelaLogin(janela, message="Usuário inválido! Tente novamente")
 
