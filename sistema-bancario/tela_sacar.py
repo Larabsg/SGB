@@ -45,5 +45,5 @@ def janelaSacar(janela, nConta):
         btnconfirmar = Button(janela4, text="confirmar", command=partial(sacar, valor,  nConta))
         btnconfirmar.place(x=50, y=150)
         
-        btnCancelar = Button(janela4, text="Cancelar")
+        btnCancelar = Button(janela4, text="Cancelar", command=janela4.destroy)
         btnCancelar.place(x=160, y=150)
