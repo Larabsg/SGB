@@ -25,6 +25,7 @@ c_sec = "#193842"
 def janelaPrincipal():
     janela = Tk()
     janela.geometry("300x240")
+    janela.eval('tk::PlaceWindow . center')
     janela.configure(background="#feffff")
     janela.resizable(width=FALSE, height=FALSE)
 

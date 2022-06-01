@@ -25,7 +25,7 @@ def janelaLogin(janela):
         janela10.geometry("310x300")
 
         janela10.configure(background="#feffff")
-        janela.resizable(width=FALSE, height=FALSE)
+        janela10.resizable(width=FALSE, height=FALSE)
 
         frame_cima = tkinter.Frame(janela10, width=300, height=50, relief='flat', bg='#feffff')
         frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)

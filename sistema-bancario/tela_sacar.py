@@ -5,7 +5,11 @@ from connection_sqlite import *
 
 from tkinter import *
 from tkinter.ttk import *
+import tkinter
 
+c_pri = "#2d6375"
+branco = "#D7E0D7"
+c_sec = "#193842"
 
 def sacar(valor, nConta):
         valor = float(valor.get())
@@ -33,17 +37,24 @@ def janelaSacar(janela, nConta):
         
         janela4 = Toplevel(janela)
         janela4.title("SGB ")
-        janela4.geometry("300x240")
+        janela4.geometry("300x300")
+
+        janela4.configure(background="#feffff")
+        janela4.resizable(width=FALSE, height=FALSE)
+
+        frame_cima = tkinter.Frame(janela4, width=300, height=50, relief='flat', bg='#feffff')
+        frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
+        frame_baixo = tkinter.Frame(janela4, width=300, height=250, relief='flat', bg='#feffff')
+        frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
         
-        texto = Label(janela4, text=" Quanto gostaria de sacar? ")
-        texto.place(x=70, y=20)
+        texto = tkinter.Label(frame_cima, text=" Quanto gostaria de sacar? ", anchor=NE, font=('Ivy', 15), bg='#feffff', fg=c_pri)
+        texto.place(x=15, y=23)
         
-        
-        valor = Entry(janela4, width=25)
+        valor = Entry(frame_baixo, width=25)
         valor.place(x=70, y= 50)
 
-        btnconfirmar = Button(janela4, text="confirmar", command=partial(sacar, valor,  nConta))
-        btnconfirmar.place(x=50, y=150)
+        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(sacar, valor,  nConta))
+        btnconfirmar.place(x=60, y=150)
         
-        btnCancelar = Button(janela4, text="Cancelar", command=janela4.destroy)
-        btnCancelar.place(x=160, y=150)
+        btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=janela4.destroy)
+        btnCancelar.place(x=151, y=150)
