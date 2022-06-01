@@ -2,13 +2,15 @@ from webbrowser import get
 
 
 class Conta():
-    def __init__(self,  nConta, saldo,  cpf, nome, senha, tipoConta):
+    def __init__(self,  nConta, saldo,  cpf, nome, senha, tipoConta, gerente, TemEmprestimo):
         self.__nConta = nConta
         self.__saldo = saldo
         self.__cpf = cpf
         self.__nome = nome
         self.__senha = senha
         self.__tipoConta = tipoConta
+        self.__gerente = gerente
+        self.__TemEmprestimo = TemEmprestimo
 
     def get_nConta(self):
         return self.__nConta
@@ -45,6 +47,19 @@ class Conta():
 
     def set_tipoConta(self, tipoConta):
         self.__tipoConta = tipoConta
+    
+    def getGerente(self):
+        return self.__gerente
+    
+    def setGerente(self, gerente):
+        self.__gerente = gerente
+    
+    def getTemEmprestimo(self):
+        #retorna true ou false
+        return self.__temEmprestimo
+    
+    def setTemEmprestimo(self, TemEmprestimo):
+        self.__TemEmprestimo = TemEmprestimo
 
     def depositar(deposito):
         saldo = saldo + deposito

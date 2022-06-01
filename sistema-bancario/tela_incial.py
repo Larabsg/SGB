@@ -20,7 +20,7 @@ azul = "#00008e"
 c_sec = "#193842"
 
 
-def janelaEntrar(janela, nConta=1234):
+def janelaEntrar(janela, nConta):
     
     janela2 = Toplevel(janela)
     #janela2.title(f"Bem Vindo, {info[0][0]}! ")
