@@ -9,3 +9,10 @@ CREATE TABLE `conta` (
     `saldo` DOUBLE NOT NULL,
     `tipoConta` VARCHAR(30) NOT NULL
 ) 
+
+CREATE TABLE `funcionario` (
+     `id` SERIAL PRIMARY KEY,
+     `nome` VARCHAR(100) NOT NULL,
+     `matricula` VARCHAR(40) NOT NULL UNIQUE,
+     `cargo` VARCHAR(60) NOT NULL
+)

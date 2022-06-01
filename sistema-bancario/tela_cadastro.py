@@ -24,14 +24,14 @@ def janelaCadastrar(janela):
     janela3 = Toplevel(janela)
 
     #janela3.title("Cadastrar-se")
-    janela3.geometry("300x350")
+    janela3.geometry("300x310")
 
     janela3.configure(background="#feffff")
     janela3.resizable(width=FALSE, height=FALSE)
 
     frame_cima = tkinter.Frame(janela3, width=300, height=50, relief='flat', bg='#feffff')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
-    frame_baixo = tkinter.Frame(janela3, width=300, height=280, relief='flat', bg='#feffff')
+    frame_baixo = tkinter.Frame(janela3, width=300, height=260, relief='flat', bg='#feffff')
     frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
     textoInicial = tkinter.Label(frame_cima, text="CADASTRO", anchor=NE, font=('Ivy', 18), bg='#feffff', fg=c_pri)
@@ -70,7 +70,7 @@ def janelaCadastrar(janela):
     inputSaldo = tkinter.Entry(frame_baixo, width=25, font=("", 8), highlightthickness=1, relief='solid')
     inputSaldo.place(x=120, y=140)
 
-    # pegando os valores do radiubutton de tipo Conta
+    # pegando os valores do radiubutton
     def tipoConta():
         escolha = v0.get()
         if escolha == 1:
@@ -79,46 +79,20 @@ def janelaCadastrar(janela):
             return "Poupança"
         else:
             return "Invalida seleção"
-    
-    # peagando valores do radiubutton de cheque especial
-    def temChequeEspecial():
-        escolha = v1.get()
-        if escolha == 1:
-            return True
-        elif escolha == 2:
-            return False
-        else:
-            return "Invalida seleção"
-    
-    # chequeEspecial
-    chequeEspecial = tkinter.Label(frame_baixo, text="Cheque especial *:", anchor=NE, font=('Ivy', 10), bg='#feffff', fg=c_pri)
-    chequeEspecial.place(x=10, y=165)
-    
-    v1 = IntVar()
-    v1.set(1)
-    rs = tkinter.Radiobutton(frame_baixo, text="Sim", variable=v1,
-                     value=1, command=temChequeEspecial)
-    rn = tkinter.Radiobutton(frame_baixo, text="Não", variable=v1,
-                     value=2, command=temChequeEspecial)
-    rs.place(x=140, y=165)
-    rn.place(x=195, y=165)
-    
-    # tipoConta
-    chequeEspecial = tkinter.Label(frame_baixo, text="Tipo Conta *:", anchor=NE, font=('Ivy', 10), bg='#feffff', fg=c_pri)
-    chequeEspecial.place(x=10, y=195)
-    
+
     v0 = IntVar()
     v0.set(1)
+
     r1 = tkinter.Radiobutton(frame_baixo, text="Corrente", variable=v0,
                      value=1, command=tipoConta)
     r2 = tkinter.Radiobutton(frame_baixo, text="Poupança", variable=v0,
                      value=2, command=tipoConta)
 
-    r1.place(x=110, y=195)
-    r2.place(x=190, y=195)
+    r1.place(x=60, y=170)
+    r2.place(x=140, y=170)
 
     btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(janela, inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), tipoConta()))
-    btnCadastrar.place(x=10, y=225)
+    btnCadastrar.place(x=10, y=205)
 
     def cadastro(janela, nome, cpf, senha, nConta, saldo, tipoConta):
         c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta)
