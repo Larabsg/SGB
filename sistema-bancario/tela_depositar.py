@@ -4,7 +4,12 @@ from tokenize import Double
 from connection_sqlite import *
 
 from tkinter import *
+import tkinter
 from tkinter.ttk import *
+
+c_pri = "#2d6375"
+branco = "#D7E0D7"
+c_sec = "#193842"
 
 def depositar(valor, nConta):
         valor = float(valor.get())
@@ -27,16 +32,24 @@ def janelaDepositar(janela, nConta):
         # lembrar de verificar qual o tipo de conta
         janela5 = Toplevel(janela)
         janela5.title("SGB ")
-        janela5.geometry("300x240")
+        janela5.geometry("300x300")
+
+        janela5.configure(background="#feffff")
+        janela5.resizable(width=FALSE, height=FALSE)
+
+        frame_cima = tkinter.Frame(janela5, width=300, height=50, relief='flat', bg='#feffff')
+        frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
+        frame_baixo = tkinter.Frame(janela5, width=300, height=250, relief='flat', bg='#feffff')
+        frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
         
-        texto = Label(janela5, text=" Quanto gostaria de depositar ? ")
-        texto.place(x=70, y=20)
+        texto = tkinter.Label(frame_cima, text="Quanto gostaria de depositar?", anchor=NE, font=('Ivy', 15), bg='#feffff', fg=c_pri)
+        texto.place(x=15, y=23)
         
-        valor = Entry(janela5, width=25)
+        valor = Entry(frame_baixo, width=25)
         valor.place(x=70, y= 50)
         
-        btnconfirmar = Button(janela5, text="confirmar", command=partial(depositar, valor, nConta))
-        btnconfirmar.place(x=50, y=150)
+        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(depositar, valor, nConta))
+        btnconfirmar.place(x=60, y=150)
         
-        btnCancelar = Button(janela5, text="Cancelar")
-        btnCancelar.place(x=160, y=150)
+        btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=janela5.destroy)
+        btnCancelar.place(x=151, y=150)

@@ -96,7 +96,7 @@ def janelaCadastrar(janela):
 
     def cadastro(janela, nome, cpf, senha, nConta, saldo, tipoConta):
         c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta)
-        # cur.execute(f'INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta) values({c1.get_nome()}, {c1.get_cpf()}, {c1.get_senha()}, {c1.get_nConta()}, {c1.get_saldo()}, {c1.get_tipoConta()});')
+       
         sql = "INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta) values(?,?,?,?,?,?)"
         cur.execute(sql, (c1.get_nome(), c1.get_cpf(), c1.get_senha(), 
                           c1.get_nConta(), c1.get_saldo(), c1.get_tipoConta()))
@@ -104,4 +104,4 @@ def janelaCadastrar(janela):
         con_sqlite.commit()
         
 
-        tela_incial.janelaEntrar(janela, nConta)
+        tela_incial.janelaEntrar(janela, nConta, tipoConta)
