@@ -54,5 +54,3 @@ def janelaEntrar(janela, nConta=1234):
     btnExtrato = tkinter.Button(frame_baixo, text="Extrato", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(
         tela_extrato.janelaExtrato, janela, nConta))
     btnExtrato.place(x=10, y=190)
-
-    
