@@ -9,7 +9,7 @@ from tkinter import *
 import tkinter
 from tkinter.ttk import *
 from tkinter import messagebox
-import tela_incial
+import tela_gerente
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -35,8 +35,8 @@ def janelaLoginFuncionario():
         linha = tkinter.Label(frame_cima, text="", anchor=NW, width=275, font=('Ivy 1'), bg=c_sec, fg=letra)
         linha.place(x=10, y =45)
 
-        nconta = tkinter.Label(frame_baixo, text="Nº conta *", anchor=NW, font=('Ivy', 10), bg='#feffff', fg=c_pri)
-        nconta.place(x=10, y =20)
+        matricula = tkinter.Label(frame_baixo, text="Matrícula *", anchor=NW, font=('Ivy', 10), bg='#feffff', fg=c_pri)
+        matricula.place(x=10, y =20)
 
         login = tkinter.Entry(frame_baixo, width=25, justify='left', font=("", 15), highlightthickness=1, relief='solid')
         login.place(x=14, y =50)
@@ -50,14 +50,14 @@ def janelaLoginFuncionario():
         btn = tkinter.Button(frame_baixo, text="Entrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: verifica_login(login, passwd))
         btn.place(x=14, y =190)
 
-def verifica_login(nConta, senha):
+def verifica_login(matricula, senha):
         
-        nConta = int(nConta.get())
-        cur.execute(f"SELECT senha from funcionario where nConta = {nConta}")
+        matricula = int(matricula.get())
+        cur.execute(f"SELECT senha from funcionario where matricula = {matricula}")
         senha_bd = cur.fetchall()
         if senha_bd != []:
             if senha.get() == senha_bd[0][0]:
-                tela_incial.janelaEntrar(nConta)
+                tela_gerente.janelaEntrarGerente(matricula)
             else:
                 messagebox.showwarning('', 'Senha inválida! Tente novamente')
         else:

@@ -1,16 +1,17 @@
 class Funcionario():
-    def __init__(self, nome, cpf, cargo, salario, agencia):
+    def __init__(self, nome, matricula, cargo, salario, agencia, senha):
         self.__nome = nome
-        self.__cpf = cpf
+        self.__matricula = matricula
         self.__cargo = cargo
         self.__salario = salario
         self.__agencia = agencia
+        self.__senha = senha
 
     def getNome(self):
         return self.__nome
     
-    def getCpf(self):
-        return self.__cpf
+    def getmatricula(self):
+        return self.__matricula
 
     def getCargo(self):
         return self.__cargo
@@ -20,12 +21,15 @@ class Funcionario():
     
     def getAgencia(self):
         return self.__agencia
+
+    def getSenha(self):
+        return self.__senha
     
     def setNome(self, nome):
         self.__nome = nome
     
-    def setCpf(self, cpf):
-        self.__cpf = cpf
+    def setmatricula(self, matricula):
+        self.__matricula = matricula
     
     def setCargo(self, cargo):
         self.__cargo = cargo
@@ -35,3 +39,6 @@ class Funcionario():
     
     def setAgencia(self, agencia):
         self.__agencia = agencia
+
+    def setSenha(self, senha):
+        self.__senha = senha
