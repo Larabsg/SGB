@@ -20,11 +20,19 @@ def depositar(valor, nConta):
             user_list.append(x)
         if user_list.__len__() == 1:
             saldo = user_list[0][5]
-            saldo = (saldo+valor)
-            cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
-            cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
-            con_sqlite.commit()
-            print('Depósito efetuado com sucesso')
+            if(saldo < 0):
+                taxa = ((saldo*0.10)*-1)
+                saldo = (saldo+valor)-taxa
+                cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
+                cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
+                con_sqlite.commit()
+                print('Depósito efetuado com sucesso')
+            else:
+                saldo = (saldo+valor)
+                cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
+                cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
+                con_sqlite.commit()
+                print('Depósito efetuado com sucesso')
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
