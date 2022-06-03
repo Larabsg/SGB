@@ -1,14 +1,15 @@
 import Funcionario
+from tela_cadastro import janelaCadastrar
 
-class Gerente(Funcionario):
+class Gerente(Funcionario.Funcionario):
     def __init__(self, nome, cpf, cargo, salario, agencia):
         super().__init__(nome, cpf, cargo, salario, agencia)
     
-    def criaConta():
-        pass
+    def criaConta(self):
+        janelaCadastrar()
     
-    def getContas():
+    def getContas(self):
         pass
 
-    def realizaEmprestimo(nConta, taxa):
+    def realizaEmprestimo(self):
         pass

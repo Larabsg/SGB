@@ -28,9 +28,9 @@ def depositar(valor, nConta):
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaDepositar(janela, nConta):
+def janelaDepositar(nConta):
         # lembrar de verificar qual o tipo de conta
-        janela5 = Toplevel(janela)
+        janela5 = Tk()
         janela5.title("SGB ")
         janela5.geometry("300x300")
 

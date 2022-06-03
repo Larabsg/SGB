@@ -20,8 +20,8 @@ valor = "#38576b"
 azul = "#00008e"
 c_sec = "#193842"
 
-def janelaCadastrar(janela):
-    janela3 = Toplevel(janela)
+def janelaCadastrar():
+    janela3 = Tk()
 
     #janela3.title("Cadastrar-se")
     janela3.geometry("300x310")
@@ -91,10 +91,10 @@ def janelaCadastrar(janela):
     r1.place(x=60, y=170)
     r2.place(x=140, y=170)
 
-    btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(janela, inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), tipoConta()))
+    btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), tipoConta()))
     btnCadastrar.place(x=10, y=205)
 
-    def cadastro(janela, nome, cpf, senha, nConta, saldo, tipoConta):
+    def cadastro(nome, cpf, senha, nConta, saldo, tipoConta):
         c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta)
         # cur.execute(f'INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta) values({c1.get_nome()}, {c1.get_cpf()}, {c1.get_senha()}, {c1.get_nConta()}, {c1.get_saldo()}, {c1.get_tipoConta()});')
         sql = "INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta) values(?,?,?,?,?,?)"
@@ -104,4 +104,4 @@ def janelaCadastrar(janela):
         con_sqlite.commit()
         
 
-        tela_incial.janelaEntrar(janela, nConta)
+        tela_incial.janelaEntrar(nConta)

@@ -10,12 +10,7 @@ from tkinter.ttk import *
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
-
-preta = "#f0f3f5"
-verde = "#3fb5a3"
 letra = "#403d3d"
-valor = "#38576b"
-azul = "#00008e"
 c_sec = "#193842"
 
 def extrato(nConta):
@@ -27,11 +22,11 @@ def extrato(nConta):
             extrato.append(x)
         return extrato
 
-def janelaExtrato(janela, nConta):
+def janelaExtrato(nConta):
 
         text_extrato = extrato(nConta)
         # lembrar de verificar qual o tipo de conta
-        janela6 = Toplevel(janela)
+        janela6 = Tk()
         janela6.geometry("310x300")
 
         frame_cima = tkinter.Frame(janela6, width=310, height=50, relief='flat', bg=c_pri)

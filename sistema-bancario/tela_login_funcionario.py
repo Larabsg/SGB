@@ -1,6 +1,5 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
-from logging import root
 from tokenize import Double
 
 from setuptools import Command
@@ -11,14 +10,13 @@ import tkinter
 from tkinter.ttk import *
 from tkinter import messagebox
 import tela_incial
-from tela_login_funcionario import janelaLoginFuncionario
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 letra = "#403d3d"
 c_sec = "#193842"
 
-def janelaLogin():
+def janelaLoginFuncionario():
         janela10 = Tk()
         janela10.title("Login")
         janela10.geometry("310x300")
@@ -49,17 +47,13 @@ def janelaLogin():
         passwd = tkinter.Entry(frame_baixo, width=25, justify='left', show='*', font=("", 15), highlightthickness=1, relief='solid')
         passwd.place(x=14, y =125)
 
-        textoFunc = tkinter.Button(frame_baixo, text= 'É funcionário? Clique aqui', font=('Ivy 8 bold'), command=janelaLoginFuncionario, relief=FLAT, bg='#feffff', fg=c_pri)
-        textoFunc.place(x=14, y=155)
-        
-
         btn = tkinter.Button(frame_baixo, text="Entrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: verifica_login(login, passwd))
         btn.place(x=14, y =190)
 
 def verifica_login(nConta, senha):
         
         nConta = int(nConta.get())
-        cur.execute(f"SELECT senha from conta where nConta = {nConta}")
+        cur.execute(f"SELECT senha from funcionario where nConta = {nConta}")
         senha_bd = cur.fetchall()
         if senha_bd != []:
             if senha.get() == senha_bd[0][0]:

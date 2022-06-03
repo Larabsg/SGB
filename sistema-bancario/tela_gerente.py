@@ -1,3 +1,5 @@
+#criar contas, visualizar contas da agencia, fazer emprestimos
+
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
@@ -5,25 +7,19 @@ from connection_sqlite import *
 from tkinter import *
 from tkinter.ttk import *
 import tkinter
-import tela_sacar
-import tela_depositar
-import tela_extrato
+from tela_cadastro import janelaCadastrar
+from Gerente import Gerente
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
-
-preta = "#f0f3f5"
-verde = "#3fb5a3"
 letra = "#403d3d"
-valor = "#38576b"
-azul = "#00008e"
 c_sec = "#193842"
 
 
-def janelaEntrar(nConta):
+def janelaEntrarGerente(nConta=1234):
     
+    gerente = Gerente("lara", "12345678", "gerente", 1200, "12345")
     janela2 = Tk()
-    #janela2.title(f"Bem Vindo, {info[0][0]}! ")
     janela2.geometry("310x300")
 
     frame_cima = tkinter.Frame(janela2, width=310, height=50, relief='flat', bg=c_pri)
@@ -31,7 +27,7 @@ def janelaEntrar(nConta):
     frame_baixo = tkinter.Frame(janela2, width=310, height=250, relief='flat', bg=c_pri)
     frame_baixo.grid(row=1, column=0, pady=0, padx=0, sticky=NSEW)
 
-    cur.execute(f'select nome, saldo from conta where nConta = {nConta}')
+    cur.execute(f'select nome, saldo from funcionario where nConta = {nConta}')
     info = cur.fetchall()
 
     texto = tkinter.Label(frame_cima, text=f"Olá, {info[0][0]}! ", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)
@@ -40,19 +36,14 @@ def janelaEntrar(nConta):
     linha = tkinter.Label(frame_cima, text="", anchor=NW, width=275, font=('Ivy 1'), bg=branco, fg=letra)
     linha.place(x=10, y =45)
 
-    texto_saldo = tkinter.Label(frame_baixo, text=f"Saldo: {info[0][1]}", font=('Ivy 18'), bg=c_pri, fg=branco)
-    texto_saldo.place(x=10, y=20)
-
-    btnSacar = tkinter.Button(frame_baixo, text="Sacar", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(
-        tela_sacar.janelaSacar, nConta))
+    btnSacar = tkinter.Button(frame_baixo, text="Criar nova conta", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.criaConta)
     btnSacar.place(x=10, y=90)
 
-    btnDepositar = tkinter.Button(frame_baixo, text="Depositar", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(
-        tela_depositar.janelaDepositar, nConta))
+    btnDepositar = tkinter.Button(frame_baixo, text="Visualizar contas", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.getContas)
     btnDepositar.place(x=10, y=140)
 
-    btnExtrato = tkinter.Button(frame_baixo, text="Extrato", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(
-        tela_extrato.janelaExtrato, nConta))
+    btnExtrato = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.realizaEmprestimo)
     btnExtrato.place(x=10, y=190)
+#     mainloop()
 
-    
+# janelaEntrarGerente()

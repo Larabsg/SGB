@@ -32,10 +32,10 @@ def sacar(valor, nConta):
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaSacar(janela, nConta):
+def janelaSacar(nConta):
         # lembrar de verificar qual o tipo de conta
         
-        janela4 = Toplevel(janela)
+        janela4 = Tk()
         janela4.title("SGB ")
         janela4.geometry("300x300")
 
