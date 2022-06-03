@@ -3,15 +3,15 @@ from connection_sqlite import *
 
 
 class ContaCorrente(Conta.Conta):
-    def __init__(self, nConta, saldo, cpf, nome, senha, saque):
+    def __init__(self, nConta, saldo, cpf, nome, senha):
         super().__init__(nConta, saldo, cpf, nome, senha)
-        self.__saque = saque
+#         self.__saque = saque
 
-    def get_saque(self):
-        return self.__saque
+#     def get_saque(self):
+#         return self.__saque
 
-    def set__saque(self, saque):
-        self.__saque = saque
+#     def set__saque(self, saque):
+#         self.__saque = saque
 
     def sacar(self, saque, nConta):
         
