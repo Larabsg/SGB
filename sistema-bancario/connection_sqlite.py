@@ -8,6 +8,6 @@ with sqlite3.connect(db_path) as con_sqlite:
 # con_sqlite = sqlite3.connect('banco.db')
     cur = con_sqlite.cursor()
 
-# cur.execute('''
-# INSERT INTO conta (nome, cpf, nConta, senha, saldo ) VALUES ('lara2','12345','1234',1234,1000);
+#     cur.execute('''
+# INSERT INTO funcionario (nome, matricula, cargo, salario, agencia, senha ) VALUES ('lara diretor','123456789','diretor', 1234, 1000, '1234');
 # ''')

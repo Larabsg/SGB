@@ -9,7 +9,8 @@ from tkinter import *
 import tkinter
 from tkinter.ttk import *
 from tkinter import messagebox
-import tela_gerente
+import tela_inicial_funcionario
+from Autenticavel import Autenticavel
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -51,15 +52,23 @@ def janelaLoginFuncionario():
         btn.place(x=14, y =190)
 
 def verifica_login(matricula, senha):
+
+        autenticaveis = ["gerente", "diretor", "cliente"]
         
         matricula = int(matricula.get())
-        cur.execute(f"SELECT senha from funcionario where matricula = {matricula}")
-        senha_bd = cur.fetchall()
-        if senha_bd != []:
-            if senha.get() == senha_bd[0][0]:
-                tela_gerente.janelaEntrarGerente(matricula)
+        cur.execute(f'SELECT cargo FROM funcionario where matricula = {matricula}')
+        cargo = cur.fetchall()
+        if cargo != []:
+            if cargo[0][0] in autenticaveis:
+                cur.execute(f"SELECT senha from funcionario where matricula = {matricula}")
+                senha_bd = cur.fetchall()
+                if senha_bd != []:
+                    if senha.get() == senha_bd[0][0]:
+                        tela_inicial_funcionario.janelaEntrarFuncionario(matricula)
+                    else:
+                        messagebox.showwarning('', 'Senha inválida! Tente novamente')
             else:
-                messagebox.showwarning('', 'Senha inválida! Tente novamente')
+                messagebox.showwarning('', 'Você não pode fazer login no sistema')
         else:
             messagebox.showwarning('', 'Usuário inválido! Tente novamente')
 

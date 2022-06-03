@@ -9,6 +9,7 @@ from tkinter.ttk import *
 import tkinter
 from tela_cadastro import janelaCadastrar
 from Gerente import Gerente
+from Autenticavel import Autenticavel
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -16,7 +17,7 @@ letra = "#403d3d"
 c_sec = "#193842"
 
 
-def janelaEntrarGerente(matricula):
+def janelaEntrarFuncionario(matricula):
     janela2 = Tk()
     janela2.geometry("310x300")
 
@@ -29,6 +30,7 @@ def janelaEntrarGerente(matricula):
     info = cur.fetchall()
 
     gerente = Gerente(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6])
+    #print(isinstance(gerente, Autenticavel))
 
     if info[0][3] == "gerente":
 
@@ -46,6 +48,11 @@ def janelaEntrarGerente(matricula):
 
         btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.realizaEmprestimo)
         btnEmprestimo.place(x=10, y=190)
-#     mainloop()
+    elif info[0][3] == "diretor":
+        # cadastrar funcionarios
 
-# janelaEntrarGerente("12345")
+        #visualizar funcionarios
+
+        # emprestimos a funcionarios
+        pass
+
