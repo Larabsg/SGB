@@ -20,7 +20,7 @@ azul = "#00008e"
 c_sec = "#193842"
 
 
-def janelaEntrar(janela, nConta, tipoConta):
+def janelaEntrar(janela, nConta):
     
     janela2 = Toplevel(janela)
     #janela2.title(f"Bem Vindo, {info[0][0]}! ")
@@ -44,7 +44,7 @@ def janelaEntrar(janela, nConta, tipoConta):
     texto_saldo.place(x=10, y=20)
 
     btnSacar = tkinter.Button(frame_baixo, text="Sacar", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(
-        tela_sacar.janelaSacar, janela, nConta, tipoConta))
+        tela_sacar.janelaSacar, janela, nConta))
     btnSacar.place(x=10, y=90)
 
     btnDepositar = tkinter.Button(frame_baixo, text="Depositar", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(

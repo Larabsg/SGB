@@ -13,18 +13,19 @@ c_pri = "#2d6375"
 branco = "#D7E0D7"
 c_sec = "#193842"
 
-def sacar(valor, nConta, tipoConta):
+def sacar(valor, nConta):
         valor = float(valor.get())
-        user_list = []
+        user_list = [] 
         cur.execute(f'select * from conta where nConta = {nConta}')
-
+        
         for x in cur:
             user_list.append(x)
         if user_list.__len__() == 1:
             saldo = user_list[0][5]
-
-            if(tipoConta == "Corrente"):
-                c1 = ContaCorrente.sacar(sald)
+            
+            if(cur.execute(f'select * from conta where nConta = {nConta} and tipoConta = "Corrente" ')):
+                c1 = ContaCorrente.sacar(valor, nConta)
+                
             else:
                 if(saldo-valor) < 0:
                     print('Saldo insuficiente')
@@ -35,8 +36,8 @@ def sacar(valor, nConta, tipoConta):
                     cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {valor});')
                     con_sqlite.commit()
                     print('Saque efetuado com sucesso')
-            else:
-                print('conta ou senha incorreta\nVerifique os dados e tente novamente')
+        else:
+            print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
 def janelaSacar(janela, nConta):
         # lembrar de verificar qual o tipo de conta
