@@ -11,6 +11,7 @@ from Autenticavel import Autenticavel
 from Diretor import Diretor
 from tela_visualizar_contas import janelaVisualizarContas
 from tela_visualizar_funcionarios import janelaVisualizarFuncionarios
+from tela_agencia import janelaAgencia
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -60,11 +61,14 @@ def janelaEntrarFuncionario(matricula):
         linha.place(x=10, y =45)
 
         btnConta = tkinter.Button(frame_baixo, text="Criar novo funcionário", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=diretor.cadastrarFuncionarios)
-        btnConta.place(x=10, y=90)
+        btnConta.place(x=10, y=50)
 
         btnViewFuncionarios = tkinter.Button(frame_baixo, text="Visualizar funcionários", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(janelaVisualizarFuncionarios, diretor.visualizarFuncionarios()))
-        btnViewFuncionarios.place(x=10, y=140)
+        btnViewFuncionarios.place(x=10, y=100)
+
+        btnViewContas = tkinter.Button(frame_baixo, text="Visualizar contas", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(janelaAgencia, diretor))
+        btnViewContas.place(x=10, y=150)
 
         btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=diretor.emprestimoFuncionario)
-        btnEmprestimo.place(x=10, y=190)
+        btnEmprestimo.place(x=10, y=200)
 
