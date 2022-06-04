@@ -7,15 +7,19 @@ class Funcionario():
         self.__agencia = agencia
         self.__senha = senha
 
+    @property
     def getNome(self):
         return self.__nome
     
+    @property
     def getmatricula(self):
         return self.__matricula
 
+    @property
     def getCargo(self):
         return self.__cargo
 
+    @property
     def getSalario(self):
         return self.__salario
     
@@ -23,6 +27,7 @@ class Funcionario():
     def getAgencia(self):
         return self.__agencia
 
+    @property
     def getSenha(self):
         return self.__senha
     

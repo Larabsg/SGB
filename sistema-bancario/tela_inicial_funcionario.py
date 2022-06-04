@@ -1,5 +1,3 @@
-#criar contas, visualizar contas da agencia, fazer emprestimos
-
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from tokenize import Double
@@ -10,7 +8,9 @@ import tkinter
 from tela_cadastro import janelaCadastrar
 from Gerente import Gerente
 from Autenticavel import Autenticavel
+from Diretor import Diretor
 from tela_visualizar_contas import janelaVisualizarContas
+from tela_visualizar_funcionarios import janelaVisualizarFuncionarios
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -30,10 +30,9 @@ def janelaEntrarFuncionario(matricula):
     cur.execute(f'select * from funcionario where matricula = {matricula}')
     info = cur.fetchall()
 
-    gerente = Gerente(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6])
-    #print(isinstance(gerente, Autenticavel))
-
     if info[0][3] == "gerente":
+
+        gerente = Gerente(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6])
 
         texto = tkinter.Label(frame_cima, text=f"Olá, {info[0][1]}! ", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)
         texto.place(x=5, y=5)
@@ -49,11 +48,23 @@ def janelaEntrarFuncionario(matricula):
 
         btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.realizaEmprestimo)
         btnEmprestimo.place(x=10, y=190)
+
     elif info[0][3] == "diretor":
-        # cadastrar funcionarios
 
-        #visualizar funcionarios
+        diretor = Diretor(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6])
 
-        # emprestimos a funcionarios
-        pass
+        texto = tkinter.Label(frame_cima, text=f"Olá, {info[0][1]}! ", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)
+        texto.place(x=5, y=5)
+
+        linha = tkinter.Label(frame_cima, text="", anchor=NW, width=275, font=('Ivy 1'), bg=branco, fg=letra)
+        linha.place(x=10, y =45)
+
+        btnConta = tkinter.Button(frame_baixo, text="Criar novo funcionário", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=diretor.cadastrarFuncionarios)
+        btnConta.place(x=10, y=90)
+
+        btnViewFuncionarios = tkinter.Button(frame_baixo, text="Visualizar funcionários", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(janelaVisualizarFuncionarios, diretor.visualizarFuncionarios()))
+        btnViewFuncionarios.place(x=10, y=140)
+
+        btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=diretor.emprestimoFuncionario)
+        btnEmprestimo.place(x=10, y=190)
 
