@@ -1,5 +1,6 @@
 import Funcionario
 from tela_cadastro import janelaCadastrar
+from connection_sqlite import *
 
 class Gerente(Funcionario.Funcionario):
     def __init__(self, nome, cpf, cargo, salario, agencia, senha):
@@ -9,7 +10,9 @@ class Gerente(Funcionario.Funcionario):
         janelaCadastrar()
     
     def getContas(self):
-        pass
+        cur.execute(f'select * from conta where agencia = {super().getAgencia}')
+        contas = cur.fetchall()
+        return contas
 
     def realizaEmprestimo(self):
         pass

@@ -10,6 +10,7 @@ import tkinter
 from tela_cadastro import janelaCadastrar
 from Gerente import Gerente
 from Autenticavel import Autenticavel
+from tela_visualizar_contas import janelaVisualizarContas
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -43,7 +44,7 @@ def janelaEntrarFuncionario(matricula):
         btnConta = tkinter.Button(frame_baixo, text="Criar nova conta", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.criaConta)
         btnConta.place(x=10, y=90)
 
-        btnViewConta = tkinter.Button(frame_baixo, text="Visualizar contas", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.getContas)
+        btnViewConta = tkinter.Button(frame_baixo, text="Visualizar contas", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(janelaVisualizarContas, gerente.getContas()))
         btnViewConta.place(x=10, y=140)
 
         btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=gerente.realizaEmprestimo)

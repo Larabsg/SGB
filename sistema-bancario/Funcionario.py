@@ -19,6 +19,7 @@ class Funcionario():
     def getSalario(self):
         return self.__salario
     
+    @property
     def getAgencia(self):
         return self.__agencia
 
