@@ -55,7 +55,7 @@ def janelaCadastrar():
     senha = tkinter.Label(frame_baixo, text="Senha *:", anchor=NW, font=('Ivy', 10), bg='#feffff', fg=c_pri)
     senha.place(x=10, y=80)
 
-    inputSenha = tkinter.Entry(frame_baixo, width=25, font=("", 8), highlightthickness=1, relief='solid')
+    inputSenha = tkinter.Entry(frame_baixo, width=25, font=("", 8), show='*', highlightthickness=1, relief='solid')
     inputSenha.place(x=120, y=80)
 
     nconta = tkinter.Label(frame_baixo, text="Nº conta *:", anchor=NW, font=('Ivy', 10), bg='#feffff', fg=c_pri)
@@ -71,7 +71,7 @@ def janelaCadastrar():
     inputSaldo.place(x=120, y=140)
 
     # pegando os valores do radiubutton
-    def tipoConta():
+    def tipoConta(): # ta indo só a opção corrente
         escolha = v0.get()
         if escolha == 1:
             return "Corrente"
@@ -95,12 +95,12 @@ def janelaCadastrar():
     btnCadastrar.place(x=10, y=205)
 
     def cadastro(nome, cpf, senha, nConta, saldo, tipoConta):
-        c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta)
-       
-        sql = "INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta) values(?,?,?,?,?,?)"
+        c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta, "Paulo", True) # ver essa modificação
+        
+        sql = "INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta, agencia) values(?,?,?,?,?,?,?)"
         cur.execute(sql, (c1.get_nome(), c1.get_cpf(), c1.get_senha(), 
-                          c1.get_nConta(), c1.get_saldo(), c1.get_tipoConta()))
-
+                          c1.get_nConta(), c1.get_saldo(), c1.get_tipoConta(), 1000))
+        
         con_sqlite.commit()
         
 
