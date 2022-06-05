@@ -24,7 +24,7 @@ def sacar(valor, nConta):
             saldo = user_list[0][5]
             
             if(cur.execute(f'select * from conta where nConta = {nConta} and tipoConta = "Corrente" ')):
-                c1 = ContaCorrente(nConta, 0, '0', '0', '0', '0')
+                c1 = ContaCorrente(nConta, 0, '0', '0', '0', '0', '0', '0')
                 c1.sacar(valor,nConta)
                 
             else:

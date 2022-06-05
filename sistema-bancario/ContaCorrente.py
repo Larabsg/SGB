@@ -3,8 +3,8 @@ from connection_sqlite import *
 
 
 class ContaCorrente(Conta.Conta):
-    def __init__(self, nConta, saldo, cpf, nome, senha, tipoConta):
-        super().__init__(nConta, saldo, cpf, nome, senha, tipoConta)
+    def __init__(self, nConta, saldo, cpf, nome, senha, tipoConta, gerente, TemEmprestimo):
+        super().__init__(nConta, saldo, cpf, nome, senha, tipoConta, gerente, TemEmprestimo)
 
 #         self.__saque = saque
 

@@ -48,17 +48,17 @@ class Conta():
     def set_tipoConta(self, tipoConta):
         self.__tipoConta = tipoConta
     
-    def getGerente(self):
+    def get_Gerente(self):
         return self.__gerente
     
-    def setGerente(self, gerente):
+    def set_Gerente(self, gerente):
         self.__gerente = gerente
     
-    def getTemEmprestimo(self):
+    def get_TemEmprestimo(self):
         #retorna true ou false
-        return self.__temEmprestimo
+        return self.__TemEmprestimo
     
-    def setTemEmprestimo(self, TemEmprestimo):
+    def set_TemEmprestimo(self, TemEmprestimo):
         self.__TemEmprestimo = TemEmprestimo
 
     def depositar(deposito):
