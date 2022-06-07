@@ -61,15 +61,4 @@ class Conta():
     def set_TemEmprestimo(self, TemEmprestimo):
         self.__TemEmprestimo = TemEmprestimo
 
-    def depositar(deposito):
-        saldo = saldo + deposito
-        # update no bd
     
-    def extrato():
-        pass
-        # puxar do bd
-
-    def teste():
-        return 'teste' 
-    # def deposito(self):
-    # def extrato(self):

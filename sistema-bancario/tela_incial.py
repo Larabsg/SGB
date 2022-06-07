@@ -31,20 +31,27 @@ def janelaEntrar(nConta):
     frame_baixo = tkinter.Frame(janela2, width=310, height=250, relief='flat', bg=c_pri)
     frame_baixo.grid(row=1, column=0, pady=0, padx=0, sticky=NSEW)
 
-    cur.execute(f'select nome, saldo from conta where nConta = {nConta}')
+    user_list = []
+    
+    cur.execute(f'select nome, saldo, tipoConta from conta where nConta = {nConta}')
     info = cur.fetchall()
     
     # Implementando taxa, chamar contaPoupança aqui?
-    user_list = []
-    if user_list.__len__() == 1:
-        saldo = user_list[0][5]
 
-        if(cur.execute(f'select * from conta where nConta = {nConta} and tipoConta = "Poupança" ')):
-            taxa = saldo*0.1
-            saldo = (saldo+taxa)
-            cur.execute(
-                        f'UPDATE conta SET saldo = {saldo} where nConta = {nConta}')
-            con_sqlite.commit()
+    # for x in cur:
+    #     user_list.append(x)
+
+    # if user_list.__len__() == 1:
+    #     saldo = user_list[0][5]
+        
+    #     cur.execute(f'select * from conta where nConta = ? AND tipoConta = ? ', (nConta, "Poupança"))
+    #     if(cur.execute == True):
+    #         taxa = 10
+    #         saldo = (saldo+taxa)
+    #         print(saldo)
+    #         cur.execute(
+    #                     f'UPDATE conta SET saldo = {saldo} where nConta = {nConta}')
+    #         con_sqlite.commit()
         
 
     texto = tkinter.Label(frame_cima, text=f"Olá, {info[0][0]}! ", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)

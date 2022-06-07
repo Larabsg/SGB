@@ -8,6 +8,7 @@ from tkinter.ttk import *
 import tkinter
 
 from ContaCorrente import ContaCorrente
+from ContaPoupanca import ContaPoupanca
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -23,20 +24,19 @@ def sacar(valor, nConta):
         if user_list.__len__() == 1:
             saldo = user_list[0][5]
             
-            if(cur.execute(f'select * from conta where nConta = {nConta} and tipoConta = "Corrente" ')):
+            cur.execute(f'select * from conta where nConta = ? AND tipoConta = ? ', (nConta, "Corrente"))
+            # if não está funcionando
+            if(cur.execute == True):
                 c1 = ContaCorrente(nConta, 0, '0', '0', '0', '0', '0', '0')
                 c1.sacar(valor,nConta)
                 
             else:
                 if(saldo-valor) < 0:
-                    print('Saldo insuficiente')
+                    print('Saldo insuficiente, sua conta não possui Cheque especial')
                 else:
-                    saldo = (saldo-valor)
-                    cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta};')
-        
-                    cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {valor});')
-                    con_sqlite.commit()
-                    print('Saque efetuado com sucesso')
+                    c2 = ContaPoupanca(nConta, 0, '0', '0', '0', '0', '0', '0', '0')
+                    c2.sacar(valor,nConta)
+                    
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
