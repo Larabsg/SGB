@@ -1,5 +1,5 @@
 from ctypes.wintypes import DOUBLE
-from functools import partial
+from functools import partial   
 import tkinter
 from tokenize import Double
 from turtle import bgcolor

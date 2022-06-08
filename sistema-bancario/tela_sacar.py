@@ -26,6 +26,7 @@ def sacar(valor, nConta):
             
             cur.execute(f'select * from conta where nConta = ? AND tipoConta = ? ', (nConta, "Corrente"))
             # if não está funcionando
+            
             if(cur.execute == True):
                 c1 = ContaCorrente(nConta, 0, '0', '0', '0', '0', '0', '0')
                 c1.sacar(valor,nConta)

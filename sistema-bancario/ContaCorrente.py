@@ -6,6 +6,7 @@ class ContaCorrente(Conta.Conta):
     def __init__(self, nConta, saldo, cpf, nome, senha, tipoConta, gerente, TemEmprestimo):
         super().__init__(nConta, saldo, cpf, nome, senha, tipoConta, gerente, TemEmprestimo)
     
+    # NÃO ESTÁ FUNCIONANDO ESSE MÉTODO
     def depositarCorrente(self, nConta, valor):
         user_list = []
         cur.execute(f'select * from conta where nConta = {nConta}')
@@ -36,7 +37,7 @@ class ContaCorrente(Conta.Conta):
             if(saque >= saldo):
                 
                 saldo = (saldo-saque)
-                print(saldo)
+                # print(saldo)
                 cur.execute(
                     f'UPDATE conta SET saldo = {saldo} where nConta = {nConta}')
                 cur.execute(
