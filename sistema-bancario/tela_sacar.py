@@ -8,6 +8,7 @@ from tkinter.ttk import *
 import tkinter
 
 from ContaCorrente import ContaCorrente
+from ContaPoupanca import ContaPoupanca
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -16,34 +17,38 @@ c_sec = "#193842"
 def sacar(valor, nConta):
         valor = float(valor.get())
         user_list = [] 
+        
         cur.execute(f'select * from conta where nConta = {nConta}')
+        # info = cur.fetchall()
+        # print(info[0][6])
         
         for x in cur:
             user_list.append(x)
+            
         if user_list.__len__() == 1:
             saldo = user_list[0][5]
             
-            if(cur.execute(f'select * from conta where nConta = {nConta} and tipoConta = "Corrente" ')):
-                c1 = ContaCorrente(nConta, 0, '0', '0', '0', '0')
+            
+            if user_list[0][6] == "Corrente":
+                c1 = ContaCorrente(nConta, 0, '0', '0', '0', '0', '0', '0')
                 c1.sacar(valor,nConta)
                 
-            else:
+            elif user_list[0][6] == "Poupança":
+                
                 if(saldo-valor) < 0:
-                    print('Saldo insuficiente')
+                    print('Saldo insuficiente, sua conta não possui Cheque especial')
                 else:
-                    saldo = (saldo-valor)
-                    cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta};')
-        
-                    cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {valor});')
-                    con_sqlite.commit()
-                    print('Saque efetuado com sucesso')
+                    c2 = ContaPoupanca(nConta, 0, '0', '0', '0', '0', '0', '0', '0')
+                    c2.sacar(valor,nConta)
+            else:
+                print("Sem tipo de conta")
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaSacar(janela, nConta):
+def janelaSacar(nConta):
         # lembrar de verificar qual o tipo de conta
         
-        janela4 = Toplevel(janela)
+        janela4 = Tk()
         janela4.title("SGB ")
         janela4.geometry("300x300")
 

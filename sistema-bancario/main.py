@@ -1,5 +1,5 @@
 from ctypes.wintypes import DOUBLE
-from functools import partial
+from functools import partial   
 import tkinter
 from tokenize import Double
 from turtle import bgcolor
@@ -42,10 +42,10 @@ def janelaPrincipal():
     linha = tkinter.Label(frame_cima, text="", anchor=NW, width=275, font=('Ivy 1'), bg=branco, fg=letra)
     linha.place(x=10, y =45)
 
-    btn = tkinter.Button(frame_baixo, text="Fazer login", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command= partial(janelaLogin, janela))
+    btn = tkinter.Button(frame_baixo, text="Fazer login", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[janelaLogin(), janela.destroy()] )
     btn.place(x=8, y =70)
 
-    btnCadastro = tkinter.Button(frame_baixo, text="Cadastrar-se", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(janelaCadastrar, janela))
+    btnCadastro = tkinter.Button(frame_baixo, text="Cadastrar-se", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[janelaCadastrar(), janela.destroy()])
     btnCadastro.place(x=8, y =120)
     
     # fechando a janela principal

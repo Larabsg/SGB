@@ -7,6 +7,8 @@ from tkinter import *
 import tkinter
 from tkinter.ttk import *
 
+from ContaCorrente import ContaCorrente
+
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 c_sec = "#193842"
@@ -20,13 +22,11 @@ def depositar(valor, nConta):
             user_list.append(x)
         if user_list.__len__() == 1:
             saldo = user_list[0][5]
-            if(saldo < 0):
-                taxa = ((saldo*0.10)*-1)
-                saldo = (saldo+valor)-taxa
-                cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
-                cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
-                con_sqlite.commit()
-                print('Depósito efetuado com sucesso')
+            
+            if(saldo < 0): # Se saldo é menor que zero é porque é conta corrente
+                c1 = ContaCorrente(nConta, 0, '0', '0', '0', '0', '0', '0')
+                c1.depositarCorrente(nConta, valor)
+                
             else:
                 saldo = (saldo+valor)
                 cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
@@ -36,9 +36,9 @@ def depositar(valor, nConta):
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
-def janelaDepositar(janela, nConta):
+def janelaDepositar(nConta):
         # lembrar de verificar qual o tipo de conta
-        janela5 = Toplevel(janela)
+        janela5 = Tk()
         janela5.title("SGB ")
         janela5.geometry("300x300")
 
