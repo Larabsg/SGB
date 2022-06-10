@@ -16,3 +16,15 @@ CREATE TABLE `funcionario` (
      `matricula` VARCHAR(40) NOT NULL UNIQUE,
      `cargo` VARCHAR(60) NOT NULL
 )
+
+CREATE TABLE funcionario(
+	id intEGER PRIMARY KEY AUTOINCREMENT,
+  	nome VARCHAR(100) NOT NULL,
+  	matricula VARCHAR(60) UNIQUE NOT NULL,
+  	cargo VARCHAR(60) NOT NULL,
+  	senha VARCHAR(60) NOT NULL,
+  	salario real not NULL,
+  	agencia varchar(15) not NULL,
+  	id_nConta int not NULL,
+  	FOREIGN KEY(id_nConta) REFERENCES conta(nConta) 	
+)

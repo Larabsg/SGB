@@ -70,6 +70,6 @@ def janelaEntrarFuncionario(matricula):
         btnViewContas = tkinter.Button(frame_baixo, text="Visualizar contas", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(janelaAgencia, diretor))
         btnViewContas.place(x=10, y=150)
 
-        btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=diretor.emprestimoFuncionario)
+        btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:tela_emprestimo.janelaEmprestimo(matricula))
         btnEmprestimo.place(x=10, y=200)
 

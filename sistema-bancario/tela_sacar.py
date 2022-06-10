@@ -22,6 +22,7 @@ def sacar(valor, nConta):
         # info = cur.fetchall()
         # print(info[0][6])
         
+        # acho que n é necessário
         for x in cur:
             user_list.append(x)
             
