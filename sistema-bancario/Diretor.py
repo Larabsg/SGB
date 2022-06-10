@@ -3,7 +3,7 @@ import Autenticavel
 from tela_cadastro_funcionarios import janelaCadastrarFuncionario
 from connection_sqlite import *
 
-class Diretor(Funcionario.Funcionario):
+class Diretor(Funcionario.Funcionario, Autenticavel.Autenticavel):
     def __init__(self, nome, matricula, cargo, salario, agencia, senha):
         super().__init__(nome, matricula, cargo, salario, agencia, senha)
     
