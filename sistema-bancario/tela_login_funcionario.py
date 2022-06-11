@@ -48,10 +48,10 @@ def janelaLoginFuncionario():
         passwd = tkinter.Entry(frame_baixo, width=25, justify='left', show='*', font=("", 15), highlightthickness=1, relief='solid')
         passwd.place(x=14, y =125)
 
-        btn = tkinter.Button(frame_baixo, text="Entrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: verifica_login(login, passwd))
+        btn = tkinter.Button(frame_baixo, text="Entrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: verifica_login(janela10, login, passwd))
         btn.place(x=14, y =190)
 
-def verifica_login(matricula, senha):
+def verifica_login(janela, matricula, senha):
 
         autenticaveis = ["gerente", "diretor", "cliente"]
         
@@ -65,6 +65,7 @@ def verifica_login(matricula, senha):
                 if senha_bd != []:
                     if senha.get() == senha_bd[0][0]:
                         tela_inicial_funcionario.janelaEntrarFuncionario(matricula)
+                        janela.destroy()
                     else:
                         messagebox.showwarning('', 'Senha inválida! Tente novamente')
             else:
