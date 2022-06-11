@@ -1,34 +1,60 @@
 from ctypes.wintypes import DOUBLE
 from functools import partial
+from logging import root
 from tokenize import Double
+
+from setuptools import Command
 from connection_sqlite import *
 
 from tkinter import *
+import tkinter
 from tkinter.ttk import *
+from tkinter import messagebox
 import tela_incial
+from tela_login_funcionario import janelaLoginFuncionario
 
-def janelaLogin(janela, message=""):
-        janela10 = Toplevel(janela)
+c_pri = "#2d6375"
+branco = "#D7E0D7"
+letra = "#403d3d"
+c_sec = "#193842"
+
+def janelaLogin():
+        janela10 = Tk()
         janela10.title("Login")
-        janela10.geometry("300x300")
-        nconta = Label(janela10, text="Nº conta: ")
-        nconta.place(x=20, y =40)
+        janela10.geometry("310x300")
 
-        login = Entry(janela10, width=25)
-        login.place(x=90, y =40)
+        janela10.configure(background="#feffff")
+        janela10.resizable(width=FALSE, height=FALSE)
 
-        senha = Label(janela10, text="Senha: ")
-        senha.place(x=20, y =70)
+        frame_cima = tkinter.Frame(janela10, width=300, height=50, relief='flat', bg='#feffff')
+        frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
+        frame_baixo = tkinter.Frame(janela10, width=300, height=250, relief='flat', bg='#feffff')
+        frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
-        passwd = Entry(janela10, width=25)
-        passwd.place(x=90, y =70)
+        texto = tkinter.Label(frame_cima, text="LOGIN", anchor=NE, font=('Ivy', 18), bg='#feffff', fg=c_pri)
+        texto.place(x=5, y =5)
 
-        btn = Button(janela10, text="Entrar", command=lambda: verifica_login(janela, login, passwd))
-        btn.place(x=40, y =150)
+        linha = tkinter.Label(frame_cima, text="", anchor=NW, width=275, font=('Ivy 1'), bg=c_sec, fg=letra)
+        linha.place(x=10, y =45)
 
-        if message != "":
-            messagem = Label(janela10, text=message)
-            messagem.place(x=20, y=190)
+        nconta = tkinter.Label(frame_baixo, text="Nº conta *", anchor=NW, font=('Ivy', 10), bg='#feffff', fg=c_pri)
+        nconta.place(x=10, y =20)
+
+        login = tkinter.Entry(frame_baixo, width=25, justify='left', font=("", 15), highlightthickness=1, relief='solid')
+        login.place(x=14, y =50)
+
+        senha = tkinter.Label(frame_baixo, text="Senha *", anchor=NW, font=('Ivy', 10), bg='#feffff', fg=c_pri)
+        senha.place(x=10, y =95)
+
+        passwd = tkinter.Entry(frame_baixo, width=25, justify='left', show='*', font=("", 15), highlightthickness=1, relief='solid')
+        passwd.place(x=14, y =125)
+
+        textoFunc = tkinter.Button(frame_baixo, text= 'É funcionário? Clique aqui', font=('Ivy 8 bold'), command=lambda:[janelaLoginFuncionario(), janela10.destroy()], relief=FLAT, bg='#feffff', fg=c_pri)
+        textoFunc.place(x=14, y=155)
+        
+
+        btn = tkinter.Button(frame_baixo, text="Entrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: verifica_login(janela10, login, passwd))
+        btn.place(x=14, y =190)
 
 def verifica_login(janela, nConta, senha):
         
@@ -37,9 +63,10 @@ def verifica_login(janela, nConta, senha):
         senha_bd = cur.fetchall()
         if senha_bd != []:
             if senha.get() == senha_bd[0][0]:
-                tela_incial.janelaEntrar(janela, nConta)
+                tela_incial.janelaEntrar(nConta)
+                janela.destroy()
             else:
-                janelaLogin(janela, message="Senha inválida! Tente novamente")
+                messagebox.showwarning('', 'Senha inválida! Tente novamente')
         else:
-            janelaLogin(janela, message="Usuário inválido! Tente novamente")
+            messagebox.showwarning('', 'Usuário inválido! Tente novamente')
 
