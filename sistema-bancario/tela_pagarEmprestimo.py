@@ -24,14 +24,17 @@ def pagarEmprestimo(nConta, valor):
         user_list.append(x)
     if user_list.__len__() == 1:
         valorEmprestimo = user_list[0][10]
+        saldo = user_list[0][5]
+
         if valorEmprestimo == 0:
             messagebox.showwarning('', 'Não há valor a ser pago')
         else:
             valorEmprestimo = (valorEmprestimo - valor)
+            saldo = (saldo - valor)
             cur.execute(
-                f'UPDATE conta SET valorEmprestimo = {valorEmprestimo} WHERE nConta = {nConta}')
+                f'UPDATE conta SET valorEmprestimo = {valorEmprestimo}, saldo = {saldo} WHERE nConta = {nConta}')
             cur.execute(
-                f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
+                f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Pagamento de Emprestimo", {valor});')
             con_sqlite.commit()
             print('Emprestimo pago com sucesso')
     else:
