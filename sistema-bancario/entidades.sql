@@ -28,3 +28,14 @@ CREATE TABLE funcionario(
   	id_nConta int not NULL,
   	FOREIGN KEY(id_nConta) REFERENCES conta(nConta) 	
 )
+
+CREATE TABLE data(
+  id intEGER PRIMARY KEY AUTOINCREMENT,
+  ontem text not NULL,
+  hoje text not NULL
+)
+-- atualizar saldo diaramente quando o tipo de conta for poupança   
+CREATE TRIGGER TR_CONTA
+AFTER INSERT ON TB_CONTA
+BEGIN
+    INSERT INTO conta(saldo) values(saldo)

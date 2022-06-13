@@ -39,7 +39,7 @@ def sacar(valor, nConta):
                 if(saldo-valor) < 0:
                     print('Saldo insuficiente, sua conta não possui Cheque especial')
                 else:
-                    c2 = ContaPoupanca(nConta, 0, '0', '0', '0', '0', '0', '0', '0')
+                    c2 = ContaPoupanca(nConta, 0, '0', '0', '0', '0', '0', '0')
                     c2.sacar(valor,nConta)
             else:
                 print("Sem tipo de conta")

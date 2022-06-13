@@ -10,6 +10,8 @@ import tela_depositar
 import tela_extrato
 import tela_pagarEmprestimo
 
+from ContaPoupanca import ContaPoupanca
+
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 
@@ -34,7 +36,7 @@ def janelaEntrar(nConta):
         janela2, width=310, height=290, relief='flat', bg=c_pri)
     frame_baixo.grid(row=1, column=0, pady=0, padx=0, sticky=NSEW)
 
-    # user_list = []
+    
 
     cur.execute(
         f'select nome, saldo, tipoConta, temEmprestimo from conta where nConta = {nConta}')
@@ -68,3 +70,8 @@ def janelaEntrar(nConta):
         btnEmprestimo = tkinter.Button(frame_baixo, text="Empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=(
             'Ivy 8 bold'), relief=FLAT, command=partial(tela_pagarEmprestimo.janelaPagarEmprestimo, nConta))
         btnEmprestimo.place(x=10, y=240)
+
+    if info[0][2] == 'Poupança':
+        c = ContaPoupanca('0','0','0','0','0','0','0','0')
+        c.atualizarData()
+        c.atualizarSaldo(nConta)
