@@ -73,5 +73,6 @@ def janelaEntrar(nConta):
 
     if info[0][2] == 'Poupança':
         c = ContaPoupanca('0','0','0','0','0','0','0','0')
-        c.atualizarData()
+        
         c.atualizarSaldo(nConta)
+        c.atualizarData()

@@ -37,22 +37,24 @@ class ContaPoupanca(Conta.Conta):
     def atualizarSaldo(self, nConta):
         
         hoje = datetime.date.today()
-        
         user_list = []
-        cur.execute(f'select * from conta where nConta = {nConta} ')
+        cur.execute(f'select * from conta where nConta ={nConta} ')
 
         for x in cur:
-            user_list.append(x)
+            print(user_list.append(x))
 
         if user_list.__len__() == 1:
             saldo = user_list[0][5]
-
-        saldo = (saldo + 0.5)
-        
-        cur.execute(f'SELECT ontem FROM data')
-        ontem = cur.fetchall()
-        
+            print("saldo sem a taxa",saldo)
+            
+            saldo = (saldo + 0.9)
+            print("saldo com a taxa",saldo)
+            cur.execute(f'SELECT ontem FROM data')
+            ontem = cur.fetchall()
         # mudar logica
-        if ontem[0][0] != hoje:
-            cur.execute(f'UPDATE conta SET saldo={saldo} WHERE nConta = {nConta}')
-            con_sqlite.commit()
+            if ontem[0][0] != hoje:
+                cur.execute(f'UPDATE conta SET saldo={saldo} WHERE tipoConta = "Poupança"')
+                con_sqlite.commit()
+            else:
+                print('logica errada')
+            
