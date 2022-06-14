@@ -71,8 +71,9 @@ def janelaEntrar(nConta):
             'Ivy 8 bold'), relief=FLAT, command=partial(tela_pagarEmprestimo.janelaPagarEmprestimo, nConta))
         btnEmprestimo.place(x=10, y=240)
 
-    if info[0][2] == 'Poupança':
-        c = ContaPoupanca('0','0','0','0','0','0','0','0')
+    
+    
+    # c = ContaPoupanca('0','0','0','0','0','0','0','0')
         
-        c.atualizarSaldo(nConta)
-        c.atualizarData()
+    # c.atualizarSaldo()
+        

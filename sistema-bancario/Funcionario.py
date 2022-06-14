@@ -12,7 +12,7 @@ class Funcionario():
         return self.__nome
     
     @property
-    def getmatricula(self):
+    def getMatricula(self):
         return self.__matricula
 
     @property

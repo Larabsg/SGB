@@ -111,7 +111,7 @@ def janelaCadastrar():
     r1.place(x=60, y=170)
     r2.place(x=140, y=170)
     btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=(
-        'Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), tipoConta()))
+        'Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), "Poupança"))
     
     btnCadastrar.place(x=10, y=205)
 
