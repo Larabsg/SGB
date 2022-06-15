@@ -11,6 +11,8 @@ from tkinter.ttk import *
 from tela_login import janelaLogin
 from tela_cadastro import janelaCadastrar
 
+
+
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 
@@ -47,7 +49,6 @@ def janelaPrincipal():
 
     btnCadastro = tkinter.Button(frame_baixo, text="Cadastrar-se", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[janelaCadastrar(), janela.destroy()])
     btnCadastro.place(x=8, y =120)
-    
     # fechando a janela principal
     mainloop()
 

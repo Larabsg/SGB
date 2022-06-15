@@ -100,7 +100,7 @@ def janelaCadastrar():
             return "Invalida seleção"
 
     v0 = IntVar()
-    v0.set(1)
+    # v0.set(1)
 
     r1 = tkinter.Radiobutton(frame_baixo, text="Corrente", variable=v0,
                              value=1, command=lambda: tipoConta)
@@ -111,7 +111,7 @@ def janelaCadastrar():
     r1.place(x=60, y=170)
     r2.place(x=140, y=170)
     btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=(
-        'Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), tipoConta()))
+        'Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), "Poupança"))
     
     btnCadastrar.place(x=10, y=205)
 
@@ -120,7 +120,7 @@ def janelaCadastrar():
             print("nConta está vazio")
         else:
             c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta,
-                    "Paulo", True)  # ver essa modificação
+                    "0", True)  # ver essa modificação
 
             sql = "INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta, agencia) values(?,?,?,?,?,?,?)"
             cur.execute(sql, (c1.get_nome(), c1.get_cpf(), c1.get_senha(),
@@ -129,7 +129,7 @@ def janelaCadastrar():
             con_sqlite.commit()
             
             tela_incial.janelaEntrar(nConta)
-#     mainloop()  
+    # mainloop()  
 
 # janelaCadastrar()
 
