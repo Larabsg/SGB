@@ -32,9 +32,9 @@ def janelaVisualizarFuncionarios(funcionarios):
         linha.place(x=10, y =45)
 
         index = 40
-        txt = tkinter.Label(frame_baixo, text='NOME \t| MATRÍCULA |\t AGÊNCIA', font=('Ivy 10 bold'), bg=c_pri, fg=branco)
+        txt = tkinter.Label(frame_baixo, text='NOME\t                 | MATRÍCULA   |  AGÊNCIA', font=('Ivy 10 bold'), bg=c_pri, fg=branco) 
         txt.place(x=15, y=10)
         for e in range(len(funcionarios)):
-            lista = tkinter.Label(frame_baixo, text=f'{funcionarios[e][1]} \t| {funcionarios[e][2]} \t| {funcionarios[e][5]}\n', font=('Ivy 10 bold'), bg=c_pri, fg=branco)
+            lista = tkinter.Label(frame_baixo, text=f'{funcionarios[e][1]}\t    | {funcionarios[e][2]} \t|  {funcionarios[e][5]}\n', font=('Ivy 10 bold'), bg=c_pri, fg=branco)
             lista.place(x=10, y=index)
             index+=20

@@ -9,6 +9,8 @@ from tkinter.ttk import *
 import tkinter
 from tkinter import messagebox
 
+import tela_incial
+
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 c_sec = "#193842"
@@ -37,6 +39,7 @@ def pagarEmprestimo(nConta, valor):
                 f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Pagamento de Emprestimo", {valor});')
             con_sqlite.commit()
             print('Emprestimo pago com sucesso')
+            tela_incial.janelaEntrar(nConta)
     else:
         print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
@@ -80,9 +83,9 @@ def janelaPagarEmprestimo(nConta):
     valor.place(x=70, y=95)
 
     btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=(
-        'Ivy 8 bold'), relief=FLAT, command=partial(pagarEmprestimo, nConta, valor))
+        'Ivy 8 bold'), relief=FLAT, command=lambda: [pagarEmprestimo(nConta, valor), janela8.destroy()])
     btnconfirmar.place(x=60, y=150)
 
     btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=(
-        'Ivy 8 bold'), relief=FLAT, command=janela8.destroy)
+        'Ivy 8 bold'), relief=FLAT, command=lambda: [tela_incial.janelaEntrar(nConta), janela8.destroy()])
     btnCancelar.place(x=151, y=150)

@@ -12,6 +12,8 @@ from tkinter import messagebox
 from Gerente import Gerente
 from Diretor import Diretor
 
+import tela_incial
+
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 c_sec = "#193842"
@@ -94,7 +96,7 @@ def janelaEmprestimo(matricula):
 
     if info[0][3] == "gerente":
         btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=(
-                'Ivy 8 bold'), relief=FLAT, command=lambda: emprestimo(inputnConta.get(), inputvalor.get(), nome))
+                'Ivy 8 bold'), relief=FLAT, command=lambda:[emprestimo(inputnConta.get(), inputvalor.get(), nome), janela7.destroy()])
         btnconfirmar.place(x=60, y=150)
 
     elif info[0][3] == "diretor":
@@ -107,11 +109,11 @@ def janelaEmprestimo(matricula):
         inputmatricula.place(x=120, y=90)
 
         btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=(
-                'Ivy 8 bold'), relief=FLAT, command=lambda: emprestimoFuncionario(inputnConta.get(), inputvalor.get(), nome, inputmatricula))
+                'Ivy 8 bold'), relief=FLAT, command=lambda:[emprestimoFuncionario(inputnConta.get(), inputvalor.get(), nome, inputmatricula),janela7.destroy()])
         btnconfirmar.place(x=60, y=150)
 
     btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=(
-            'Ivy 8 bold'), relief=FLAT, command=janela7.destroy)
+            'Ivy 8 bold'), relief=FLAT, command=lambda:[tela_incial.janelaEntrar(nConta),janela7.destroy()])
     btnCancelar.place(x=151, y=150)
 
   

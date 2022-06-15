@@ -27,11 +27,11 @@ def janelaExtrato(nConta):
         text_extrato = extrato(nConta)
         # lembrar de verificar qual o tipo de conta
         janela6 = Tk()
-        janela6.geometry("310x300")
+        janela6.geometry("400x300")
 
-        frame_cima = tkinter.Frame(janela6, width=310, height=50, relief='flat', bg=c_pri)
+        frame_cima = tkinter.Frame(janela6, width=400, height=50, relief='flat', bg=c_pri)
         frame_cima.grid(row=0, column=0, pady=0, padx=0, sticky=NSEW)
-        frame_baixo = tkinter.Frame(janela6, width=310, height=250, relief='flat', bg=c_pri)
+        frame_baixo = tkinter.Frame(janela6, width=400, height=250, relief='flat', bg=c_pri)
         frame_baixo.grid(row=1, column=0, pady=0, padx=0, sticky=NSEW)
         
         scrollbar = tkinter.Scrollbar(frame_baixo)
@@ -40,7 +40,7 @@ def janelaExtrato(nConta):
         texto = tkinter.Label(frame_cima, text="EXTRATO", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)
         texto.place(x=5, y=5)
 
-        linha = tkinter.Label(frame_cima, text="", anchor=NW, width=275, font=('Ivy 1'), bg=branco, fg=letra)
+        linha = tkinter.Label(frame_cima, text="", anchor=NW, width=370, font=('Ivy 1'), bg=branco, fg=letra)
         linha.place(x=10, y =45)
 
         visu_extrato = tkinter.Text(frame_baixo, yscrollcommand=scrollbar.set, font=('Ivy 10 bold'), bg=c_pri, fg=branco)
@@ -52,7 +52,7 @@ def janelaExtrato(nConta):
             # lista = tkinter.Label(frame_baixo, text=f'{text_extrato[e][0]} .............................................. {text_extrato[e][1]}\n')
             # lista.place(x=10, y=index)
             # index+=20
-            visu_extrato.insert(END, f'{text_extrato[e][0]} .............................................. {text_extrato[e][1]}\n')
+            visu_extrato.insert(END, f'{text_extrato[e][0]} ....................................... {text_extrato[e][1]}\n')
         
         visu_extrato.pack(expand=True, pady=40, padx=15)
         scrollbar.config(command=visu_extrato.yview)

@@ -6,8 +6,8 @@ from tkinter import messagebox
 import tela_inicial_funcionario
 
 class Gerente(Funcionario.Funcionario):
-    def __init__(self, nome, matricula, cargo, salario, agencia, senha):
-        super().__init__(nome, matricula, cargo, salario, agencia, senha)
+    def __init__(self, nome, matricula, cargo, salario, agencia, senha, nConta):
+        super().__init__(nome, matricula, cargo, salario, agencia, senha, nConta)
     
     def criaConta(self):
         janelaCadastrar()

@@ -34,7 +34,7 @@ def janelaEntrarFuncionario(matricula):
 
     if info[0][3] == "gerente":
 
-        gerente = Gerente(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6])
+        gerente = Gerente(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6], info[0][7])
 
         texto = tkinter.Label(frame_cima, text=f"Olá, {info[0][1]}! ", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)
         texto.place(x=5, y=5)
@@ -53,7 +53,7 @@ def janelaEntrarFuncionario(matricula):
 
     elif info[0][3] == "diretor":
 
-        diretor = Diretor(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6])
+        diretor = Diretor(info[0][1], info[0][2], info[0][3], info[0][4], info[0][5], info[0][6], info[0][7])
 
         texto = tkinter.Label(frame_cima, text=f"Olá, {info[0][1]}! ", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)
         texto.place(x=5, y=5)

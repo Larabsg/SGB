@@ -1,6 +1,7 @@
 import Conta
 from connection_sqlite import *
 
+import tela_incial
 
 class ContaCorrente(Conta.Conta):
     def __init__(self, nConta, saldo, cpf, nome, senha, tipoConta, gerente, TemEmprestimo):
@@ -21,6 +22,7 @@ class ContaCorrente(Conta.Conta):
         cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
         cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
         con_sqlite.commit()
+        tela_incial.janelaEntrar(nConta)
         print('Depósito efetuado com sucesso')
         
     def sacar(self, saque, nConta):
@@ -43,7 +45,7 @@ class ContaCorrente(Conta.Conta):
                 cur.execute(
                     f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {saque});')
                 con_sqlite.commit()
-                print("saldo zero")
+                tela_incial.janelaEntrar(nConta)
             else:
 
                 saldo = (saldo - saque)
@@ -53,4 +55,5 @@ class ContaCorrente(Conta.Conta):
                 cur.execute(
                     f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {saque});')
                 con_sqlite.commit()
+                tela_incial.janelaEntrar(nConta)
                 print('Saque efetuado com sucesso')

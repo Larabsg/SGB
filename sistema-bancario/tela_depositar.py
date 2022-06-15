@@ -9,6 +9,8 @@ from tkinter.ttk import *
 
 from ContaCorrente import ContaCorrente
 
+import tela_incial
+
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 c_sec = "#193842"
@@ -32,7 +34,9 @@ def depositar(valor, nConta):
                 cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
                 cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
                 con_sqlite.commit()
+                
                 print('Depósito efetuado com sucesso')
+                tela_incial.janelaEntrar(nConta)
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
@@ -56,8 +60,8 @@ def janelaDepositar(nConta):
         valor = Entry(frame_baixo, width=25)
         valor.place(x=70, y= 50)
         
-        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(depositar, valor, nConta))
+        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[depositar(valor, nConta), janela5.destroy()])
         btnconfirmar.place(x=60, y=150)
         
-        btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=janela5.destroy)
+        btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[tela_incial.janelaEntrar(nConta),janela5.destroy()])
         btnCancelar.place(x=151, y=150)
