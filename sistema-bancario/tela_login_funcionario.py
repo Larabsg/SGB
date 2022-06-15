@@ -67,7 +67,6 @@ def janelaLoginFuncionario():
 
 def verifica_login(janela, matricula, senha):
 
-    autenticaveis = ["gerente", "diretor", "cliente"]
 
     matricula = int(matricula.get())
     cur.execute(f'SELECT cargo FROM funcionario where matricula = {matricula}')
