@@ -2,6 +2,7 @@ from ast import Return
 from ctypes.wintypes import DOUBLE
 from functools import partial
 from pydoc import cli
+from tkinter import messagebox
 from tokenize import Double
 from connection_sqlite import *
 
@@ -27,7 +28,7 @@ def janelaCadastrar():
     janela3 = Tk()
 
     # janela3.title("Cadastrar-se")
-    janela3.geometry("300x310")
+    janela3.geometry("300x320")
 
     janela3.configure(background="#feffff")
     janela3.resizable(width=FALSE, height=FALSE)
@@ -36,7 +37,7 @@ def janelaCadastrar():
         janela3, width=300, height=50, relief='flat', bg='#feffff')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
     frame_baixo = tkinter.Frame(
-        janela3, width=300, height=260, relief='flat', bg='#feffff')
+        janela3, width=300, height=270, relief='flat', bg='#feffff')
     frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
     textoInicial = tkinter.Label(frame_cima, text="CADASTRO", anchor=NE, font=(
@@ -68,7 +69,7 @@ def janelaCadastrar():
     senha.place(x=10, y=80)
 
     inputSenha = tkinter.Entry(frame_baixo, width=25, font=(
-        "", 8), show='*', highlightthickness=1, relief='solid')
+        "", 8),  highlightthickness=1, relief='solid')
     inputSenha.place(x=120, y=80)
 
     nconta = tkinter.Label(frame_baixo, text="Nº conta *:",
@@ -87,55 +88,71 @@ def janelaCadastrar():
         "", 8), highlightthickness=1, relief='solid')
     inputSaldo.place(x=120, y=140)
 
+    tipoConta = tkinter.Label(frame_baixo, text="Tipo de conta *:",
+                          anchor=NW, font=('Ivy', 10), bg='#feffff', fg=c_pri)
+    tipoConta.place(x=10, y=170)
+
+    inputTipoConta = tkinter.Entry(frame_baixo, width=25, font=(
+        "", 8), highlightthickness=1, relief='solid')
+    inputTipoConta.place(x=120, y=170)
+
+    r1 = tkinter.Label(frame_baixo, text="00 - Corrente", font=('Ivy', 8), bg='#feffff', fg=c_pri)
+    r2 = tkinter.Label(frame_baixo, text="01 - Poupança", font=('Ivy', 8), bg='#feffff', fg=c_pri)
+
     # pegando os valores do radiubutton
-    def tipoConta():  # ta indo só a opção corrente
-        escolha = v0.get()
-        # escolha
-        print(escolha)
-        if escolha == 1:
-            return "Corrente"
-        elif escolha == 2:
-            return "Poupança"
-        else:
-            return "Invalida seleção"
+    # def tipoConta():  # ta indo só a opção corrente
+    #     escolha = v0.get()
+    #     # escolha
+    #     print(escolha)
+    #     if escolha == 1:
+    #         return "Corrente"
+    #     elif escolha == 2:
+    #         return "Poupança"
+    #     else:
+    #         return "Invalida seleção"
 
-    v0 = IntVar()
-    # v0.set(1)
+    # v0 = IntVar()
+    # # v0.set(1)
 
-    r1 = tkinter.Radiobutton(frame_baixo, text="Corrente", variable=v0,
-                             value=1, command=lambda: tipoConta)
+    # r1 = tkinter.Radiobutton(frame_baixo, text="Corrente", variable=v0,
+    #                          value=1, command=lambda: tipoConta)
 
-    r2 = tkinter.Radiobutton(frame_baixo, text="Poupança", variable=v0,
-                             value=2,  command=lambda: tipoConta)
+    # r2 = tkinter.Radiobutton(frame_baixo, text="Poupança", variable=v0,
+    #                          value=2,  command=lambda: tipoConta)
 
-    r1.place(x=60, y=170)
-    r2.place(x=140, y=170)
+    r1.place(x=60, y=190)
+    r2.place(x=140, y=190)
     btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=(
-        'Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), "Poupança"))
+        'Ivy 10 bold'), relief=FLAT, command=lambda:[cadastro(inputNome.get(), inputCpf.get(), inputSenha.get(), inputnconta.get(), inputSaldo.get(), inputTipoConta.get()), janela3.destroy()])
     
-    btnCadastrar.place(x=10, y=205)
+    btnCadastrar.place(x=10, y=215)
 
     def cadastro(nome, cpf, senha, nConta, saldo, tipoConta):
-        
-        # nConta = int(nConta.get())
-        # cur.execute(f'SELECT nConta from conta where nConta={nConta}')
-        # nConta_bd = cur.fetchall()
-        
+        if tipoConta == "00":
+            tipoConta = "Corrente"
+        elif tipoConta == "01":
+            tipoConta = "Poupança"
+            
         if not nConta:
             
             print("nConta está vazio")
         else:
-            
-            c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta,
-                    "0", True)  # ver essa modificação
+            cur.execute(f"SELECT * from conta WHERE nConta = {nConta}")
+            info = cur.fetchall()
 
-            sql = "INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta, agencia) values(?,?,?,?,?,?,?)"
-            cur.execute(sql, (c1.get_nome(), c1.get_cpf(), c1.get_senha(),
-                            c1.get_nConta(), c1.get_saldo(), c1.get_tipoConta(), 1000))
+            if info == []:
+                c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta,
+                        "0", True)  # ver essa modificação
 
-            con_sqlite.commit()
-            
-            tela_incial.janelaEntrar(nConta)
+                sql = "INSERT INTO conta (nome, cpf, senha, nConta, saldo, tipoConta, agencia) values(?,?,?,?,?,?,?)"
+                cur.execute(sql, (c1.get_nome(), c1.get_cpf(), c1.get_senha(),
+                                c1.get_nConta(), c1.get_saldo(), c1.get_tipoConta(), 1000))
+
+                con_sqlite.commit()
+                
+                tela_incial.janelaEntrar(nConta)
+            else:
+                messagebox.showwarning("", "Número de conta já existe no sistema! Tente novamente")
     # mainloop()  
 
 # janelaCadastrar()

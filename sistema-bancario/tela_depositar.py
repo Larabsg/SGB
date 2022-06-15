@@ -34,6 +34,7 @@ def depositar(valor, nConta):
                 cur.execute(f'UPDATE conta SET saldo = {saldo} WHERE nConta = {nConta}')
                 cur.execute(f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Depósito", {valor});')
                 con_sqlite.commit()
+                
                 print('Depósito efetuado com sucesso')
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
