@@ -43,7 +43,7 @@ class ContaCorrente(Conta.Conta):
                 cur.execute(
                     f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {saque});')
                 con_sqlite.commit()
-                print("saldo zero")
+                
             else:
 
                 saldo = (saldo - saque)

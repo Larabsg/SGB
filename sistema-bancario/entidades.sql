@@ -18,7 +18,7 @@ CREATE TABLE `funcionario` (
 )
 
 CREATE TABLE funcionario(
-	id intEGER PRIMARY KEY AUTOINCREMENT,
+	  id intEGER PRIMARY KEY AUTOINCREMENT,
   	nome VARCHAR(100) NOT NULL,
   	matricula VARCHAR(60) UNIQUE NOT NULL,
   	cargo VARCHAR(60) NOT NULL,
@@ -34,6 +34,7 @@ CREATE TABLE data(
   ontem text not NULL,
   hoje text not NULL
 )
+
 CREATE TRIGGER tr_conta AFTER INSERT ON conta
   BEGIN 
     UPDATE conta SET saldo = (saldo * 0.9) WHERE tipoconta = (SELECT * FROM conta WHERE tipoConta = 'Poupança');
