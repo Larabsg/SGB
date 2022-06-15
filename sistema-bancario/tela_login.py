@@ -61,6 +61,7 @@ def verifica_login(janela, nConta, senha):
         nConta = int(nConta.get())
         cur.execute(f"SELECT senha from conta where nConta = {nConta}")
         senha_bd = cur.fetchall()
+        
         if senha_bd != []:
             if senha.get() == senha_bd[0][0]:
                 tela_incial.janelaEntrar(nConta)

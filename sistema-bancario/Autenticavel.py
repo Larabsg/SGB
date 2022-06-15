@@ -1,6 +1,7 @@
-from abc import ABC, abstractmethod
+import abc
 
-class Autenticavel():
+class Autenticavel(abc.ABC):
+    
     def __init__(self, senha):
         self.__senha = senha
 
@@ -10,10 +11,6 @@ class Autenticavel():
     def set_senha(self, senha):
         self.__senha = senha
 
-    # @abstractmethod
+    @abc.abstractmethod
     def autentica(self):
-        #verifica se a senha está correta
         pass
-
-# autenticaveis = ["gerente", "diretor", "cliente"]
-# Autenticavel.register(autenticaveis)

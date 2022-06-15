@@ -7,6 +7,7 @@ from connection_sqlite import *
 from tkinter import *
 from tkinter.ttk import *
 import tkinter
+from tkinter import messagebox
 
 from Gerente import Gerente
 from Diretor import Diretor
@@ -28,39 +29,24 @@ def emprestimo(nConta, valor, nome):
      
 
 def emprestimoFuncionario(nConta, valor, nome, matricula):
-    # COLOCAR TUDO ISSO NAS CLASSES
+    
+    matriculaVerificar = matricula.get()
+    matricula = int(matricula.get())
     
     cur.execute(f'SELECT matricula FROM funcionario WHERE matricula = {matricula}')
     matricula_bd = cur.fetchall()
+    
     if matricula_bd != []:
-        if matricula == matricula_bd[0][0]:
-
+        if matriculaVerificar == matricula_bd[0][0]:
             valor = float(valor)
-            
+                        
             diretor = Diretor('0','0','0','0','0','0')
             diretor.emprestimoFuncionario(nConta, valor, nome)
-            
-            # for x in cur:
-            #     user_list.append(x)
-            # if user_list.__len__() == 1:
-            #     saldo = user_list[0][5]
-
-            #     if saldo < 0:
-            #         # Quando o saldo está negativo
-            #         taxa = ((saldo*0.2)*-1)
-            #     else:
-            #         taxa = (saldo*0.2)
-
-            #     saldo = saldo + valor
-            #     valor = valor + taxa
-            #     sql = "UPDATE conta SET saldo = ?, temEmprestimo = ?, gerente = ?, valorEmprestimo = ? WHERE nConta = ?"
-            #     cur.execute(sql, (saldo, TRUE, nome, valor, nConta))
-
-            #     cur.execute(
-            #         f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Empréstimo", {valor});')
-            #     con_sqlite.commit()
-            #     print('Empréstimo efetuado com sucesso')
-
+        else:
+            messagebox.showwarning('', 'Senha inválida! Tente novamente')
+                
+    else:
+        messagebox.showwarning('', 'Usuário inválido! Tente novamente')       
 
 def janelaEmprestimo(matricula):
 
@@ -77,11 +63,11 @@ def janelaEmprestimo(matricula):
         janela7, width=300, height=250, relief='flat', bg='#feffff')
     frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
-    # user_list = []
+    
     cur.execute(f'select * from funcionario where matricula = {matricula}')
     info = cur.fetchall()
     nome = info[0][1]
-    # cargo = info[0][3]
+    
     textoInicial = tkinter.Label(frame_cima, text="EMPRESTIMO", anchor=NE, font=(
         'Ivy', 18), bg='#feffff', fg=c_pri)
     textoInicial.place(x=10, y=10)
@@ -100,11 +86,11 @@ def janelaEmprestimo(matricula):
 
     valor = tkinter.Label(frame_baixo, text="valor *: ", anchor=NW,
                           font=('Ivy', 10), bg='#feffff', fg=c_pri)
-    valor.place(x=10, y=70)
+    valor.place(x=10, y=60)
 
     inputvalor = tkinter.Entry(frame_baixo, width=25, font=(
           "", 8), highlightthickness=1, relief='solid')
-    inputvalor.place(x=120, y=70)
+    inputvalor.place(x=120, y=60)
 
     if info[0][3] == "gerente":
         btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=(
@@ -114,14 +100,14 @@ def janelaEmprestimo(matricula):
     elif info[0][3] == "diretor":
         matricula = tkinter.Label(frame_baixo, text="matricula *: ", anchor=NW,
                           font=('Ivy', 10), bg='#feffff', fg=c_pri)
-        matricula.place(x=10, y=100)
+        matricula.place(x=10, y=90)
 
         inputmatricula = tkinter.Entry(frame_baixo, width=25, font=(
           "", 8), highlightthickness=1, relief='solid')
-        inputmatricula.place(x=120, y=100)
+        inputmatricula.place(x=120, y=90)
 
         btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=(
-                'Ivy 8 bold'), relief=FLAT, command=lambda: emprestimoFuncionario(inputnConta.get(), inputvalor.get(), nome, matricula))
+                'Ivy 8 bold'), relief=FLAT, command=lambda: emprestimoFuncionario(inputnConta.get(), inputvalor.get(), nome, inputmatricula))
         btnconfirmar.place(x=60, y=150)
 
     btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=(

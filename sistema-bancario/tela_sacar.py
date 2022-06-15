@@ -39,7 +39,7 @@ def sacar(valor, nConta):
                 if(saldo-valor) < 0:
                     print('Saldo insuficiente, sua conta não possui Cheque especial')
                 else:
-                    c2 = ContaPoupanca(nConta, 0, '0', '0', '0', '0', '0', '0', '0')
+                    c2 = ContaPoupanca(nConta, 0, '0', '0', '0', '0', '0', '0')
                     c2.sacar(valor,nConta)
             else:
                 print("Sem tipo de conta")
@@ -67,7 +67,7 @@ def janelaSacar(nConta):
         valor = Entry(frame_baixo, width=25)
         valor.place(x=70, y= 50)
 
-        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(sacar, valor,  nConta))
+        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[sacar(valor,  nConta)])
         btnconfirmar.place(x=60, y=150)
         
         btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=janela4.destroy)

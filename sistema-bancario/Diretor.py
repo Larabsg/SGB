@@ -1,10 +1,11 @@
+import abc
 import Funcionario
-import Autenticavel
 from tela_cadastro_funcionarios import janelaCadastrarFuncionario
 from connection_sqlite import *
+from tkinter import messagebox
+import tela_inicial_funcionario
 
-
-class Diretor(Funcionario.Funcionario, Autenticavel.Autenticavel):
+class Diretor(Funcionario.Funcionario):
     def __init__(self, nome, matricula, cargo, salario, agencia, senha):
         super().__init__(nome, matricula, cargo, salario, agencia, senha)
 
@@ -20,7 +21,21 @@ class Diretor(Funcionario.Funcionario, Autenticavel.Autenticavel):
         cur.execute(f'select * from funcionario')
         funcionarios = cur.fetchall()
         return funcionarios
-
+    
+    @abc.abstractmethod
+    def autentica(self,senha,matricula):
+    
+        cur.execute(f"SELECT senha from funcionario where matricula = {matricula}")
+        senha_bd = cur.fetchall()
+        if senha_bd != []:
+            if senha.get() == senha_bd[0][0]:
+                tela_inicial_funcionario.janelaEntrarFuncionario(matricula)
+        #             # janela.destroy()
+            else:
+                messagebox.showwarning('', 'Senha inválida! Tente novamente')
+        else:
+            messagebox.showwarning('', 'Você não pode fazer login no sistema')
+    
     def emprestimoFuncionario(self, nConta, valor, nome):
 
         user_list = []
