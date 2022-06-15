@@ -116,9 +116,16 @@ def janelaCadastrar():
     btnCadastrar.place(x=10, y=205)
 
     def cadastro(nome, cpf, senha, nConta, saldo, tipoConta):
+        
+        # nConta = int(nConta.get())
+        # cur.execute(f'SELECT nConta from conta where nConta={nConta}')
+        # nConta_bd = cur.fetchall()
+        
         if not nConta:
+            
             print("nConta está vazio")
         else:
+            
             c1 = Conta(nConta, saldo, cpf, nome, senha, tipoConta,
                     "0", True)  # ver essa modificação
 

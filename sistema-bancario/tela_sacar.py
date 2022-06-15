@@ -10,6 +10,8 @@ import tkinter
 from ContaCorrente import ContaCorrente
 from ContaPoupanca import ContaPoupanca
 
+import tela_incial
+
 c_pri = "#2d6375"
 branco = "#D7E0D7"
 c_sec = "#193842"
@@ -50,7 +52,7 @@ def janelaSacar(nConta):
         # lembrar de verificar qual o tipo de conta
         
         janela4 = Tk()
-        janela4.title("SGB ")
+        janela4.title("SGB")
         janela4.geometry("300x300")
 
         janela4.configure(background="#feffff")
@@ -67,8 +69,8 @@ def janelaSacar(nConta):
         valor = Entry(frame_baixo, width=25)
         valor.place(x=70, y= 50)
 
-        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[sacar(valor,  nConta)])
+        btnconfirmar = tkinter.Button(frame_baixo, text="Confirmar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[sacar(valor,  nConta), janela4.destroy()])
         btnconfirmar.place(x=60, y=150)
         
-        btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=janela4.destroy)
+        btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[tela_incial.janelaEntrar(nConta), janela4.destroy()])
         btnCancelar.place(x=151, y=150)

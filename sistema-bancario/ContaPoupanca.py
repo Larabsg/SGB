@@ -2,6 +2,8 @@ import datetime
 import time
 import schedule
 
+import tela_incial
+
 import Conta
 from connection_sqlite import *
 
@@ -27,21 +29,19 @@ class ContaPoupanca(Conta.Conta):
             cur.execute(
                 f'INSERT INTO transacao (nconta, tipo, valor) VALUES ({nConta}, "Saque", {saque});')
             con_sqlite.commit()
+            tela_incial.janelaEntrar(nConta)
             print('Saque efetuado com sucesso')
 
-    
-    def atualizarSaldo(self):
-        
-        def job():
-            cur.execute(f'UPDATE conta SET saldo = (saldo + 0.05) WHERE tipoConta="Poupança";')
-            con_sqlite.commit()
-            
-            
-        # schedule.every().day.at("00:30").do(job)
-        schedule.every().day.at("00:30").do(job)
-        
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-            
-    
+    # def atualizarSaldo(self):
+
+    #     def job():
+    #         cur.execute(
+    #             f'UPDATE conta SET saldo = (saldo + 0.05) WHERE tipoConta="Poupança";')
+    #         con_sqlite.commit()
+
+    #     # schedule.every().day.at("00:30").do(job)
+    #     schedule.every().day.at("00:30").do(job)
+
+    #     while True:
+    #         schedule.run_pending()
+    #         time.sleep(1)

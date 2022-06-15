@@ -8,7 +8,7 @@ def job():
     con_sqlite.commit()
 
 schedule.every().day.at("00:00").do(job)
-# schedule.every(10).seconds.do(job)
+
 
 while True:
     schedule.run_pending()
