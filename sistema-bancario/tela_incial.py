@@ -36,7 +36,10 @@ def janelaEntrar(nConta):
         janela2, width=310, height=290, relief='flat', bg=c_pri)
     frame_baixo.grid(row=1, column=0, pady=0, padx=0, sticky=NSEW)
 
-    
+    c = ContaPoupanca('0','0','0','0','0','0','0','0')
+        
+    c.atualizarSaldo()
+        
 
     cur.execute(
         f'select nome, saldo, tipoConta, temEmprestimo from conta where nConta = {nConta}')
@@ -72,7 +75,4 @@ def janelaEntrar(nConta):
 
     
     
-    # c = ContaPoupanca('0','0','0','0','0','0','0','0')
-        
-    # c.atualizarSaldo()
-        
+    
