@@ -1,11 +1,12 @@
 class Funcionario():
-    def __init__(self, nome, matricula, cargo, salario, agencia, senha):
+    def __init__(self, nome, matricula, cargo, salario, agencia, senha, nConta):
         self.__nome = nome
         self.__matricula = matricula
         self.__cargo = cargo
         self.__salario = salario
         self.__agencia = agencia
         self.__senha = senha
+        self.__nConta = nConta
 
     @property
     def getNome(self):
@@ -30,6 +31,10 @@ class Funcionario():
     @property
     def getSenha(self):
         return self.__senha
+    
+    @property
+    def getnConta(self):
+        return self.__nConta
     
     def setNome(self, nome):
         self.__nome = nome

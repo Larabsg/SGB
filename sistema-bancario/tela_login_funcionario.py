@@ -75,7 +75,7 @@ def verifica_login(janela, matricula, senha):
     if cargo != []:
         if cargo[0][0] == "diretor":
             Autenticavel.register(Diretor)
-            diretor = Diretor('0', matricula, '0', '0', '0', senha)
+            diretor = Diretor('0', matricula, '0', '0', '0', senha, '0')
             
             if(isinstance(diretor, Autenticavel)):
                 sistema = SistemaInterno()
@@ -83,7 +83,7 @@ def verifica_login(janela, matricula, senha):
                 
         elif cargo[0][0] == "gerente":
             Autenticavel.register(Gerente)
-            gerente = Gerente('0',matricula,'0','0','0', senha)
+            gerente = Gerente('0',matricula,'0','0','0', senha, '0')
             
             if(isinstance(gerente,Autenticavel)):
                 sistema = SistemaInterno()

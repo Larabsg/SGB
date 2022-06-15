@@ -36,6 +36,7 @@ def depositar(valor, nConta):
                 con_sqlite.commit()
                 
                 print('Depósito efetuado com sucesso')
+                tela_incial.janelaEntrar(nConta)
         else:
             print('conta ou senha incorreta\nVerifique os dados e tente novamente')
 
