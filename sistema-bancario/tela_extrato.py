@@ -34,14 +34,26 @@ def janelaExtrato(nConta):
         frame_baixo = tkinter.Frame(janela6, width=310, height=250, relief='flat', bg=c_pri)
         frame_baixo.grid(row=1, column=0, pady=0, padx=0, sticky=NSEW)
         
+        scrollbar = tkinter.Scrollbar(frame_baixo)
+        scrollbar.pack(side="right", fill=Y)
+
         texto = tkinter.Label(frame_cima, text="EXTRATO", anchor=NE, font=('Ivy', 18), bg=c_pri, fg=branco)
         texto.place(x=5, y=5)
 
         linha = tkinter.Label(frame_cima, text="", anchor=NW, width=275, font=('Ivy 1'), bg=branco, fg=letra)
         linha.place(x=10, y =45)
 
+        visu_extrato = tkinter.Text(frame_baixo, yscrollcommand=scrollbar.set, font=('Ivy 10 bold'), bg=c_pri, fg=branco)
+
+        visu_extrato.configure(height=10,relief=FLAT)
+
         index = 40
         for e in range(len(text_extrato)):
-            lista = tkinter.Label(frame_baixo, text=f'{text_extrato[e][0]} .............................................. {text_extrato[e][1]}\n', font=('Ivy 10 bold'), bg=c_pri, fg=branco)
-            lista.place(x=10, y=index)
-            index+=20
+            # lista = tkinter.Label(frame_baixo, text=f'{text_extrato[e][0]} .............................................. {text_extrato[e][1]}\n')
+            # lista.place(x=10, y=index)
+            # index+=20
+            visu_extrato.insert(END, f'{text_extrato[e][0]} .............................................. {text_extrato[e][1]}\n')
+        
+        visu_extrato.pack(expand=True, pady=40, padx=15)
+        scrollbar.config(command=visu_extrato.yview)
+            

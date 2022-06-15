@@ -63,8 +63,7 @@ def janelaEntrar(nConta):
     texto_saldo = tkinter.Label(frame_baixo, text=f"Saldo: {info[0][1]}", font=('Ivy 18'), bg=c_pri, fg=branco)
     texto_saldo.place(x=10, y=20)
 
-    btnSacar = tkinter.Button(frame_baixo, text="Sacar", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(
-        tela_sacar.janelaSacar, nConta))
+    btnSacar = tkinter.Button(frame_baixo, text="Sacar", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda: [tela_sacar.janelaSacar(nConta)])
     btnSacar.place(x=10, y=90)
 
     btnDepositar = tkinter.Button(frame_baixo, text="Depositar", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(
