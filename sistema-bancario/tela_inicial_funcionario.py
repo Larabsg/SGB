@@ -48,7 +48,7 @@ def janelaEntrarFuncionario(matricula):
         btnViewConta = tkinter.Button(frame_baixo, text="Visualizar contas", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=partial(janelaVisualizarContas, gerente.getContas()))
         btnViewConta.place(x=10, y=140)
         
-        btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:tela_emprestimo.janelaEmprestimo(matricula))
+        btnEmprestimo = tkinter.Button(frame_baixo, text="Realizar empréstimo", width=39, height=2, bg=c_sec, fg=branco, font=('Ivy 8 bold'), relief=FLAT, command=lambda:[tela_emprestimo.janelaEmprestimo(matricula), janela2.destroy()])
         btnEmprestimo.place(x=10, y=190)
 
     elif info[0][3] == "diretor":

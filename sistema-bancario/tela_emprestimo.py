@@ -13,6 +13,7 @@ from Gerente import Gerente
 from Diretor import Diretor
 
 import tela_incial
+import tela_inicial_funcionario
 
 c_pri = "#2d6375"
 branco = "#D7E0D7"
@@ -113,7 +114,7 @@ def janelaEmprestimo(matricula):
         btnconfirmar.place(x=60, y=150)
 
     btnCancelar = tkinter.Button(frame_baixo, text="Cancelar", width=10, height=2, bg=c_sec, fg=branco, font=(
-            'Ivy 8 bold'), relief=FLAT, command=lambda:[tela_incial.janelaEntrar(nConta),janela7.destroy()])
+            'Ivy 8 bold'), relief=FLAT, command=lambda:[tela_inicial_funcionario.janelaEntrarFuncionario(matricula),janela7.destroy()])
     btnCancelar.place(x=151, y=150)
 
   
