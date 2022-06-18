@@ -26,7 +26,7 @@ def emprestimo(nConta, valor, nome):
     valor = float(valor)
 
    
-    gerente = Gerente('0','0','0','0','0','0')
+    gerente = Gerente('0','0','0','0','0','0','0')
     gerente.realizaEmprestimo(nConta,valor,nome)
         
      
@@ -43,7 +43,7 @@ def emprestimoFuncionario(nConta, valor, nome, matricula):
         if matriculaVerificar == matricula_bd[0][0]:
             valor = float(valor)
                         
-            diretor = Diretor('0','0','0','0','0','0')
+            diretor = Diretor('0','0','0','0','0','0','0')
             diretor.emprestimoFuncionario(nConta, valor, nome)
         else:
             messagebox.showwarning('', 'Senha inválida! Tente novamente')
