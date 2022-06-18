@@ -77,7 +77,7 @@ def janelaCadastrarFuncionario():
     inputAgencia = tkinter.Entry(frame_baixo, width=25, font=("", 8), highlightthickness=1, relief='solid')
     inputAgencia.place(x=120, y=200)
 
-    btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda: cadastro(inputNome.get(), inputmatricula.get(), inputCargo.get(), inputSalario.get(), inputAgencia.get(), inputSenha.get(), inputnConta.get()))
+    btnCadastrar = tkinter.Button(frame_baixo, text="Cadastrar", width=34, height=2, bg=c_sec, fg=branco, font=('Ivy 10 bold'), relief=FLAT, command=lambda:[cadastro(inputNome.get(), inputmatricula.get(), inputCargo.get(), inputSalario.get(), inputAgencia.get(), inputSenha.get(), inputnConta.get()), janela.destroy()])
     btnCadastrar.place(x=10, y=225)
 
     def cadastro(nome, matricula, cargo, salario, agencia, senha, nConta):
@@ -89,6 +89,7 @@ def janelaCadastrarFuncionario():
                           funcionario.getSalario, funcionario.getAgencia, funcionario.getSenha, funcionario.getnConta))
 
         con_sqlite.commit()
+        
         
 
         #janelaEntrarFuncionario(matriculaDiretor)

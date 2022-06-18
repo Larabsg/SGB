@@ -61,7 +61,7 @@ def janelaLoginFuncionario():
     passwd.place(x=14, y=125)
 
     btn = tkinter.Button(frame_baixo, text="Entrar", width=34, height=2, bg=c_sec, fg=branco, font=(
-        'Ivy 10 bold'), relief=FLAT, command=lambda: verifica_login(janela10, login, passwd))
+        'Ivy 10 bold'), relief=FLAT, command=lambda: [verifica_login(janela10, login, passwd), janela10.destroy()])
     btn.place(x=14, y=190)
 
 
@@ -71,7 +71,7 @@ def verifica_login(janela, matricula, senha):
     matricula = int(matricula.get())
     cur.execute(f'SELECT cargo FROM funcionario where matricula = {matricula}')
     cargo = cur.fetchall()
-    print(cargo)
+    
     if cargo != []:
         if cargo[0][0] == "diretor":
             Autenticavel.register(Diretor)
